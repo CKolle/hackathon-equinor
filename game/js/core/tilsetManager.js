@@ -17,9 +17,9 @@ class TilesetManager {
             this.loaded = true;
         });
     }
-    getTileSourceRect(cellType, tileOffset, x, y, time) {
-        const tile = config["cells"][cellType];
-        const electedTile = tile.tiles.default;
+    getTileSourceRect(cell, x, y, time) {
+        const tile = config["cells"][cell.type];
+        const electedTile = cell.electricityLevel>0 && tile.tiles.powered ? tile.tiles.powered : tile.tiles.default;
         let xPos = electedTile.bounds[0];
         let yPos = electedTile.bounds[1];
         if(electedTile.frames){
@@ -34,8 +34,8 @@ class TilesetManager {
             xPos += random % electedTile.bounds[2];
             yPos += random % electedTile.bounds[3];
         } else {
-            xPos += tileOffset.x;
-            yPos += tileOffset.y;
+            xPos += cell.tileOffset.x;
+            yPos += cell.tileOffset.y;
         }
     
         return {

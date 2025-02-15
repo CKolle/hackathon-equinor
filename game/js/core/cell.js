@@ -14,9 +14,10 @@ class Cell {
 
     setType(type) {
         this.type = type;
-        this.electricityLevel = 0;
+        // this.electricityLevel = 0;
         let prefab = config["cells"][type];
         this.electricityGeneration = prefab.electricityGeneration;
+        this.acceptsElectricity = prefab.acceptsElectricity;
     }
 }
 

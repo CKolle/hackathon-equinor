@@ -83,7 +83,7 @@ class Renderer {
             for (let x = startX; x <= endX; x++) {
                 const cell = grid.getCell(x, y);
                 if (!cell) continue;
-                this.renderTile(cell.type, cell.tileOffset, x, y, time);
+                this.renderCell(cell,x,y, time);
             }
         }
     }
@@ -191,9 +191,9 @@ class Renderer {
         }
     }
 
-    renderTile(tile, tileOffset, x, y, time) {
+    renderCell(cell, x,y, time) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));
-        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset, x, y, time);
+        const sourceRect = this.tilesetManager.getTileSourceRect(cell, x, y, time);
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();

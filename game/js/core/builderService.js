@@ -1,5 +1,3 @@
-import { cells } from "./cell.js";
-
 class BuilderService {
     constructor(grid){
         this.selectedType = null;
