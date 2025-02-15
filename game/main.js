@@ -46,7 +46,6 @@ class Game {
             new Timeseries("Capital", 30, 400, 100, 50),
         ]);
 
-        // this.production = new Timeseries("Production", 30, 200, 100, 50);
         this.engine = new Engine(this.renderer, this.grid, this.timeseriesManager);
 
         this.engine.addSystem("Production", this.timeseriesManager.timeseriesList[0]);
