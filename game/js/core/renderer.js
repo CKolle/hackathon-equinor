@@ -1,8 +1,10 @@
+import {ViewportController} from "./viewportController.js";
+import {Vector} from "../utils/vector.js";
 class Renderer {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.CELL_SIZE = 16;
+        this.viewport = new ViewportController(canvas.width, canvas.height);
         this.GRID_COLOR = '#ccc';
         this.GRID_LINE_WIDTH = 1;
     }
@@ -13,26 +15,41 @@ class Renderer {
 
     render(gameState) {
         this.clear();
-        this.renderGrid(gameState.grid);
+        this.renderGrid();
         // Buildings
         // Ui
     }
 
-    renderGrid(grid) {
-        this.ctx.strokeStyle = this.GRID_COLOR;
-        this.ctx.lineWidth = this.GRID_LINE_WIDTH;
+    renderGrid() {
 
-        for (let x = 0; x <= grid.width; x++) {
+        this.ctx.strokeStyle = this.GRID_COLOR;
+        this.ctx.lineWidth = this.GRID_LINE_WIDTH / this.viewport.scale; // Scale line width
+
+        const topLeft = this.viewport.screenToGrid(new Vector(0, 0));
+        const bottomRight = this.viewport.screenToGrid(new Vector(this.canvas.width, this.canvas.height));
+
+        const startX = Math.floor(topLeft.x - 1);
+        const startY = Math.floor(topLeft.y - 1);
+        const endX = Math.ceil(bottomRight.x + 1);
+        const endY = Math.ceil(bottomRight.y + 1);
+
+        for (let x = startX; x <= endX; x++) {
+            const startPoint = this.viewport.gridToScreen(new Vector(x, startY));
+            const endPoint = this.viewport.gridToScreen(new Vector(x, endY));
+
             this.ctx.beginPath();
-            this.ctx.moveTo(x * this.CELL_SIZE, 0);
-            this.ctx.lineTo(x * this.CELL_SIZE, grid.height * this.CELL_SIZE);
+            this.ctx.moveTo(startPoint.x, startPoint.y);
+            this.ctx.lineTo(endPoint.x, endPoint.y);
             this.ctx.stroke();
         }
 
-        for (let y = 0; y <= grid.height; y++) {
+        for (let y = startY; y <= endY; y++) {
+            const startPoint = this.viewport.gridToScreen(new Vector(startX, y));
+            const endPoint = this.viewport.gridToScreen(new Vector(endX, y));
+
             this.ctx.beginPath();
-            this.ctx.moveTo(0, y * this.CELL_SIZE);
-            this.ctx.lineTo(grid.width * this.CELL_SIZE, y * this.CELL_SIZE);
+            this.ctx.moveTo(startPoint.x, startPoint.y);
+            this.ctx.lineTo(endPoint.x, endPoint.y);
             this.ctx.stroke();
         }
     }
