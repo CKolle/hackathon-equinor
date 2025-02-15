@@ -10,10 +10,12 @@ class InputService {
             scroll:0,
         };
         this.onMouseMove = null;
+        this.onClick = null;
         this.onScroll = null;
 
         canvasElement.addEventListener("mousedown", (e)=>{
             this.mouse.button = e.buttons;
+            if(this.onClick) this.onClick(this.mouse);
             e.preventDefault();
         });
         

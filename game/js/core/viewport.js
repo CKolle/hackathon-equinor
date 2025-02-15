@@ -7,10 +7,13 @@ class Viewport {
     constructor(displayWidth, displayHeight){
         this.displayWidth = displayWidth;
         this.displayHeight = displayHeight;
-        this.aspectRatio = displayWidth / displayHeight;
         this.position = new Vector();
         this.scale = 10;
     }
+
+    getCellSize() { return this.displayWidth / this.scale; }
+    getWidth() { return this.scale; }
+    getHeight() { return this.scale * this.displayHeight / this.displayWidth; }
 
     zoom(multiplier, invert=false){
         if(invert) this.scale /= multiplier;
@@ -25,15 +28,15 @@ class Viewport {
 
     screenToGrid(point){
         return new Vector(
-            (point.x-this.position.x)/this.displayWidth*this.scale,
-            (point.y-this.position.y)/(this.displayHeight*this.aspectRatio)*this.scale
+            point.x / this.getCellSize() - this.position.x,
+            point.y / this.getCellSize() - this.position.y
         );
     }
 
     gridToScreen(point){
         return new Vector(
-            point.x/this.scale*this.displayWidth+this.position.x,
-            point.y/this.scale*(this.displayHeight*this.aspectRatio)+this.position.y
+            (point.x + this.position.x) * this.getCellSize(),
+            (point.y + this.position.y) * this.getCellSize(),
         );
     }
 }
