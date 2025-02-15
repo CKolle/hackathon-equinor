@@ -1,10 +1,12 @@
 import {Viewport} from "./viewport.js";
 import {Vector} from "../utils/vector.js";
 class Renderer {
-    constructor(canvas, viewport) {
+    constructor(canvas) {
         this.canvas = canvas;
+        this.canvas.width=window.innerWidth-20;
+        this.canvas.height=window.innerHeight-30;
+        this.viewport = new Viewport(canvas.width, canvas.height);
         this.ctx = canvas.getContext("2d");
-        this.viewport = viewport;
         this.GRID_COLOR = '#fff';
         this.GRID_LINE_WIDTH = 10;
     }
