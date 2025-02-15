@@ -8,9 +8,7 @@ class Game {
         this.renderer.canvas.width=500;
         this.engine = new Engine(this.renderer);
 
-        window.addEventListener("load", () => {
-            this.start();
-        });
+
     }
 
     start() {
@@ -19,3 +17,6 @@ class Game {
     }
 }
 
+window.addEventListener("load", () => {
+    this.start();
+});
