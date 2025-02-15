@@ -24,7 +24,7 @@ class TilesetManager {
         let yPos = electedTile.bounds[1];
         if(electedTile.frames){
             // Animated tiles shift the xPos along for each frame
-            let frameIndex = (time * electedTile.framerate) % electedTile.frames;
+            let frameIndex = Math.floor((time * electedTile.framerate*0.001) % electedTile.frames);
             xPos += electedTile.bounds[2] * frameIndex;
         }
     

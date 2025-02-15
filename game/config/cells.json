@@ -6,7 +6,7 @@
             "default": {
                 "bounds":[0,0,2,2],
                 "frames":2,
-                "framerate":13
+                "framerate":3
             }
         }
     },
