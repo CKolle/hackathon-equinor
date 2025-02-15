@@ -29,7 +29,6 @@ class Game {
 
     start() {
         console.log("Game starting...");
-        console.log(game.viewport.gridToScreen(new Vector(1,1)));
         this.engine.start();
     }
 }
