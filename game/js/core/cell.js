@@ -6,6 +6,10 @@ class Cell {
         this.electricityLevel = 0;
         this.type = cells.EMPTY;
     }
+
+    setType(type){
+        this.type = type;
+    }
 }
 
 const cells = Object.freeze({
