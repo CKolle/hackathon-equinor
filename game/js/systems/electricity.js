@@ -15,7 +15,7 @@ class ElectricitySystem {
                 if(!neighbor.acceptsElectricity) return;
                 let donation = cable.electricityLevel * 0.5;
                 neighbor.electricityLevel += donation;
-                cable.electricityLevel -= donation;
+                cable.electricityLevel += cable.electricityGeneration - donation;
             });
         });
     }

@@ -1,0 +1,11 @@
+{
+    "Windmill": {
+        "electricityGeneration": 1
+    },
+    "Cable": {
+        "electricityGeneration": 0
+    },
+    "City": {
+        "electricityGeneration": -1
+    }
+}
