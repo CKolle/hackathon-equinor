@@ -4,11 +4,15 @@ class Cell {
         this.y = y;
         this.acceptsElectricity = acceptsElectricity;
         this.electricityLevel = 0;
+        this.electricityGeneration = 0;
         this.type = cells.EMPTY;
     }
 
-    setType(type){
+    async setType(type){
         this.type = type;
+        this.electricityLevel = 0;
+        let prefab = config["cells"][type];
+        this.electricityGeneration = prefab.electricityGeneration;
     }
 }
 

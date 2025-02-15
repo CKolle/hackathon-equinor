@@ -23,11 +23,18 @@ class InputService {
             this.mouse.button = e.buttons;
             e.preventDefault();
         });
-        
-        canvasElement.addEventListener("mousewheel", (e)=>{
+
+        const onMouseWheel = (e)=>{
             this.mouse.scroll = e.deltaY;
             if(this.onScroll) this.onScroll(this.mouse);
-        });
+        }
+        if(window.onwheel !== undefined) {
+            window.addEventListener('wheel', onMouseWheel)
+        } else if(window.onmousewheel !== undefined) {
+            window.addEventListener('mousewheel', onMouseWheel)
+        } else {
+            console.warn("unsupported browser");
+        }
 
         canvasElement.addEventListener("mousemove", (e)=>{
             this.mouse.dx = e.clientX - this.mouse.screenPos.x;

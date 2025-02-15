@@ -1,8 +1,9 @@
 export class Engine {
-    constructor(renderer, grid) {
+    constructor(renderer, grid, timeseries) {
         this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
+        this.timeseries = timeseries;
         this.systems = new Map();
         this.grid = grid;
 
@@ -40,7 +41,8 @@ export class Engine {
 
     getGameState() {
         return {
-            grid: this.grid
+            grid: this.grid,
+            timeseries: this.timeseries
         };
     }
 }
