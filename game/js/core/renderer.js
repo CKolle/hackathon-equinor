@@ -38,6 +38,8 @@ class Renderer {
     }
 
     resize(width, height) {
+        this.ctx.save();
+
         const displayWidth = width;
         const displayHeight = height;
 
@@ -53,6 +55,8 @@ class Renderer {
 
         this.viewport.displayWidth = displayWidth;
         this.viewport.displayHeight = displayHeight;
+
+        this.ctx.restore();
     }
 
     render(gameState) {
@@ -157,8 +161,11 @@ class Renderer {
         const bgPaddingX = 20;
         const bgPaddingY = 20;
 
-        for (let timeseries of timeseriesManager.timeseriesList) {
-            const values = timeseries.data.values;
+        this.ctx.lineWidth = 1;
+        for (let i = 0; i < timeseriesManager.timeseriesList.length; i++) {
+            const timeseries = timeseriesManager.timeseriesUIList[i];
+            const values = timeseriesManager.timeseriesList[i];
+
             const maxValue = Math.max(...values);
             const minValue = Math.min(...values);
     
@@ -169,7 +176,7 @@ class Renderer {
                 timeseries.posY - bgPaddingY,
                 timeseries.width + bgPaddingX * 2,
                 timeseries.height + bgPaddingY * 2);
-    
+
             // Plot title
             this.ctx.font = `12px Arial`;
             this.ctx.beginPath();
