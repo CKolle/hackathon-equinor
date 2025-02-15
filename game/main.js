@@ -6,9 +6,7 @@ class Game {
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         this.engine = new Engine(this.renderer);
 
-        window.addEventListener("load", () => {
-            this.start();
-        });
+
     }
 
     start() {
@@ -16,3 +14,7 @@ class Game {
         this.engine.start();
     }
 }
+
+window.addEventListener("load", () => {
+    this.start();
+});
