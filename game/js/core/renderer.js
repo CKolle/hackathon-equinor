@@ -38,6 +38,8 @@ class Renderer {
     }
 
     resize(width, height) {
+        this.ctx.save();
+
         const displayWidth = width;
         const displayHeight = height;
 
@@ -53,6 +55,8 @@ class Renderer {
 
         this.viewport.displayWidth = displayWidth;
         this.viewport.displayHeight = displayHeight;
+
+        this.ctx.restore();
     }
 
     render(gameState) {
