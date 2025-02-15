@@ -5,6 +5,7 @@ import { cells } from "./js/core/cell.js";
 import { Cell } from "./js/core/cell.js";
 import { ViewportController } from "./js/core/viewportController.js";
 import { Vector } from "./js/utils/vector.js";
+import { Timeseries } from "./js/ui/timeseries.js";
 
 class Game {
     constructor() {
@@ -21,7 +22,10 @@ class Game {
 
         this.grid = new Grid(20, 15);
         
-        this.engine = new Engine(this.renderer, this.grid);
+        this.electicity = new Timeseries("Production", 30, 30, 200, 100);
+        this.engine = new Engine(this.renderer, this.grid, this.timeseries);
+
+        this.engine.addSystem("Production", this.electicity);
 
     }
 

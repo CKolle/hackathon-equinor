@@ -14,6 +14,7 @@ class Renderer {
     render(gameState) {
         this.clear();
         this.renderGrid(gameState.grid);
+        this.renderGrid(gameState.timeseries);
         // Buildings
         // Ui
     }
@@ -35,6 +36,10 @@ class Renderer {
             this.ctx.lineTo(grid.width * this.CELL_SIZE, y * this.CELL_SIZE);
             this.ctx.stroke();
         }
+    }
+
+    renderGraph(timeseriesData) {
+        // Draw here
     }
 }
 
