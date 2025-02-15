@@ -8,7 +8,8 @@ class SimTimeSystem {
         this.lightIntensity = 0;
     }
     
-    update(dt){
+    update(gameState){
+        const dt = gameState.dt;
         this.timeOfDay += dt*0.001 * this.realToGameTime;
         if(this.timeOfDay > SECONDS_PER_DAY){
             this.timeOfDay -= SECONDS_PER_DAY;

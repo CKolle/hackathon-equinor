@@ -12,9 +12,9 @@ export class Engine {
         this.systems.set(name, system);
     }
 
-    update(deltaTime) {
+    update(gameState) {
         for (const system of this.systems) {
-            system[1].update(deltaTime);
+            system[1].update(gameState);
         }
     }
 
@@ -23,10 +23,10 @@ export class Engine {
         const deltaTime = timeStamp - this.lastUpdate;
 
         if (!this.paused) {
-            this.update(deltaTime);
+            this.update(this.getGameState(deltaTime));
         }
 
-        this.renderer.render(this.getGameState());
+        this.renderer.render(this.getGameState(deltaTime));
 
         this.lastUpdate = timeStamp;
         requestAnimationFrame(this.gameLoop.bind(this));
@@ -38,8 +38,9 @@ export class Engine {
         this.gameLoop(performance.now());
     }
 
-    getGameState() {
+    getGameState(deltaTime) {
         return {
+            dt: deltaTime,
             grid: this.grid,
             time: this.lastUpdate,
             timeseriesManager: this.timeseriesManager,

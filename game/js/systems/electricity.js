@@ -8,7 +8,7 @@ class ElectricitySystem {
         this.activeCells.push(obj);
     }
 
-    update(dt){
+    update(gameState){
         // console.log(this.grid);
         for(let x=0; x<this.grid.width; x++){
             for(let y=0; y<this.grid.height; y++){
