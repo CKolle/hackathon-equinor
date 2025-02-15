@@ -74,10 +74,6 @@ class Game {
     }
 }
 
-function onConfigLoaded(){
-
-}
-
 const game = new Game();
 
 window.addEventListener("load", () => {
