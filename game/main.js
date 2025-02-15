@@ -17,6 +17,8 @@ class Game {
 
         this.inputService = new InputService(this.renderer.canvas);
 
+        window.addEventListener("resize", this.handleResize.bind(this));
+
 
         this.inputService.onMouseMove = (mouse)=>{
             if(mouse.button==0) return;
@@ -33,6 +35,12 @@ class Game {
 
     }
 
+    handleResize() {
+        const width = window.innerWidth - 20;
+        const height = window.innerHeight - 30;
+        this.renderer.resize(width, height);
+    }
+
     start() {
         console.log("Game starting...");
         this.engine.start();
@@ -45,6 +53,8 @@ window.addEventListener("load", () => {
     game.start();
     addStartupCells();
 });
+
+
 
 function addStartupCells() {
     // Adds a windmill, a cable and a city

@@ -9,10 +9,18 @@ class Renderer {
         this.ctx = canvas.getContext("2d");
         this.GRID_COLOR = '#fff';
         this.GRID_LINE_WIDTH = 10;
+
     }
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    resize(width, height){
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.viewport.displayWidth = width;
+        this.viewport.displayHeight = height;
     }
 
     render(gameState) {
@@ -54,6 +62,7 @@ class Renderer {
             this.ctx.stroke();
         }
     }
+
 }
 
 
