@@ -63,12 +63,6 @@ class Game {
         this.renderer.resize(width, height);
     }
 
-    handleResize() {
-        const width = window.innerWidth - 20;
-        const height = window.innerHeight - 30;
-        this.renderer.resize(width, height);
-    }
-
     start() {
         console.log("Game starting...");
         this.engine.start();
