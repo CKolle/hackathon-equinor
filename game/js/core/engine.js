@@ -1,9 +1,9 @@
 export class Engine {
-    constructor(renderer, grid, production) {
+    constructor(renderer, grid, timeseriesManager) {
         this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
-        this.production = production;
+        this.timeseriesManager = timeseriesManager;
         this.systems = new Map();
         this.grid = grid;
 
@@ -40,29 +40,11 @@ export class Engine {
     }
 
     getGameState() {
-        // let c = this.timeseriesManager.timeseriesList.map(ts => ({
-        //     name: ts.name,
-        //     posX: ts.posX,
-        //     posY: ts.posY,
-        //     width: ts.width,
-        //     height: ts.height,
-        //     data: ts.data
-        // }));
-        // console.log(c);
-
         return {
             grid: this.grid,
             time: this.lastUpdate,
-            production: this.production
-            // timeseriesManager: this.timeseriesManager
-            // timeseries: this.timeseriesManager.timeseriesList.map(ts => ({
-            //     name: ts.name,
-            //     posX: ts.posX,
-            //     posY: ts.posY,
-            //     width: ts.width,
-            //     height: ts.height,
-            //     data: ts.data
-            // }))
+            timeseriesManager: this.timeseriesManager
+
         };
     }
 }

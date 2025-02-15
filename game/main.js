@@ -42,15 +42,15 @@ class Game {
 
         this.grid = new Grid(20, 15);
         
-        // this.timeseriesManager = new TimeseriesManager([
-        //     new Timeseries("Production", 30, 200, 100, 50),
-        //     new Timeseries("Capital", 30, 400, 100, 50),
-        // ])
+        this.timeseriesManager = new TimeseriesManager([
+            new Timeseries("Production", 30, 200, 100, 50),
+            new Timeseries("Capital", 30, 400, 100, 50),
+        ]);
 
+        this.engine = new Engine(this.renderer, this.grid, this.timeseriesManager);
 
-        this.production = new Timeseries("Production", 30, 200, 100, 50);
-        this.engine = new Engine(this.renderer, this.grid, this.production);
-        this.engine.addSystem("Production", this.production);
+        this.engine.addSystem("Production", this.timeseriesManager.timeseriesList[0]);
+        this.engine.addSystem("Capital", this.timeseriesManager.timeseriesList[1]);
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
