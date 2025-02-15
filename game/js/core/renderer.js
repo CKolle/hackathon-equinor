@@ -4,30 +4,60 @@ import {TilesetManager} from "./tilsetManager.js";
 class Renderer {
     constructor(canvas) {
         this.canvas = canvas;
-        this.canvas.width=window.innerWidth-20;
-        this.canvas.height=window.innerHeight-30;
-        this.viewport = new Viewport(canvas.width, canvas.height);
-        this.ctx = canvas.getContext("2d");
-        this.GRID_COLOR = '#fff';
-        this.GRID_LINE_WIDTH = 10;
-        this.tilesetManager = new TilesetManager();
 
+        // Get the device pixel ratio
+        this.pixelRatio = window.devicePixelRatio || 1;
+
+        // Set the canvas size in display pixels
+        const displayWidth = window.innerWidth - 20;
+        const displayHeight = window.innerHeight - 30;
+
+        this.canvas.width = displayWidth * this.pixelRatio;
+        this.canvas.height = displayHeight * this.pixelRatio;
+
+        this.canvas.style.width = `${displayWidth}px`;
+        this.canvas.style.height = `${displayHeight}px`;
+
+        this.viewport = new Viewport(displayWidth, displayHeight);
+        this.ctx = canvas.getContext("2d", {
+            alpha: false,
+            antialias: false
+        });
+
+        this.ctx.scale(this.pixelRatio, this.pixelRatio);
+
+        this.ctx.imageSmoothingEnabled = false;
+
+        this.GRID_COLOR = '#fff';
+        this.GRID_LINE_WIDTH = 2;
+        this.tilesetManager = new TilesetManager();
     }
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    resize(width, height){
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.viewport.displayWidth = width;
-        this.viewport.displayHeight = height;
+    resize(width, height) {
+        const displayWidth = width;
+        const displayHeight = height;
+
+        this.canvas.width = displayWidth * this.pixelRatio;
+        this.canvas.height = displayHeight * this.pixelRatio;
+
+        this.canvas.style.width = `${displayWidth}px`;
+        this.canvas.style.height = `${displayHeight}px`;
+
+        this.ctx.scale(this.pixelRatio, this.pixelRatio);
+
+        this.ctx.imageSmoothingEnabled = false;
+
+        this.viewport.displayWidth = displayWidth;
+        this.viewport.displayHeight = displayHeight;
     }
 
     render(gameState) {
         this.clear();
-        this.renderBuildings(gameState.grid);
+        this.renderTiles(gameState.grid);
         this.renderGrid();
         // console.log(gameState);
         this.renderGraph(gameState.production);
@@ -38,7 +68,7 @@ class Renderer {
         // Ui
     }
 
-    renderBuildings(grid) {
+    renderTiles(grid) {
         // Get visible area of the grid
         const topLeft = this.viewport.screenToGrid(new Vector(0, 0));
         const bottomRight = this.viewport.screenToGrid(new Vector(this.canvas.width, this.canvas.height));
@@ -150,7 +180,7 @@ class Renderer {
 
     renderTile(tile, tileOffset, x, y) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));
-        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset);
+        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset, x, y);
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();

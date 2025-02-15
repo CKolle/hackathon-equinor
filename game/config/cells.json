@@ -33,10 +33,8 @@
         "electricityGeneration": 0,
         "tiles": {
             "default": {
-                "bounds":[6,6,2,2]
-            },
-            "alternative": {
-                "bounds":[4,6,2,2]
+                "bounds":[4,6,4,2],
+                "shuffle":true
             }
         }
     }
