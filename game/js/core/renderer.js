@@ -11,10 +11,6 @@ class Renderer {
         this.GRID_COLOR = '#fff';
         this.GRID_LINE_WIDTH = 10;
         this.tilesetManager = new TilesetManager();
-        this.tilesetManager.load().then(()=>{
-            console.log("Tileset loaded");
-        });
-
 
     }
 
@@ -57,7 +53,7 @@ class Renderer {
             for (let x = startX; x <= endX; x++) {
                 const cell = grid.getCell(x, y);
                 if (!cell) continue;
-                this.renderTile(cell.type, x, y);
+                this.renderTile(cell.type, cell.tileOffset, x, y);
             }
         }
     }
@@ -152,26 +148,26 @@ class Renderer {
         this.ctx.stroke();
     }
 
-    renderTile(tile, x, y) {
-        if (!this.tilesetManager.loaded || !tile) return;
-
+    renderTile(tile, tileOffset, x, y) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));
-        const tileDefinition = this.tilesetManager.getDefinition(tile);
-        if (!tileDefinition) return;
-        const sourceRect = this.tilesetManager.getTileSourceRect(tile);
+        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset);
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();
-        const renderedWidth = cellSize * tileDefinition.width;
-        const renderedHeight = cellSize * tileDefinition.height;
+        const renderedWidth = cellSize * sourceRect.width;
+        const renderedHeight = cellSize * sourceRect.height;
 
-        // Calculate anchor points (default to center)
-        const anchorX = tileDefinition.anchor?.x || 0.5;
-        const anchorY = tileDefinition.anchor?.y || 0.5;
-
-        // Calculate draw position with anchor offset
-        const drawX = screenPos.x - (renderedWidth * anchorX);
-        const drawY = screenPos.y - (renderedHeight * anchorY);
+        // console.log(
+        //     this.tilesetManager.tileset,
+        //     sourceRect.x,
+        //     sourceRect.y,
+        //     sourceRect.width,
+        //     sourceRect.height,
+        //     screenPos.x,
+        //     screenPos.y,
+        //     renderedWidth,
+        //     renderedHeight
+        // );
 
         this.ctx.drawImage(
             this.tilesetManager.tileset,
@@ -179,8 +175,8 @@ class Renderer {
             sourceRect.y,
             sourceRect.width,
             sourceRect.height,
-            drawX,
-            drawY,
+            screenPos.x,
+            screenPos.y,
             renderedWidth,
             renderedHeight
         );

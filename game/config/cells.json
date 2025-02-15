@@ -2,7 +2,7 @@
     "Windmill": {
         "acceptsElectricity": false,
         "electricityGeneration": 1,
-        "sprites": {
+        "tiles": {
             "default": {
                 "bounds":[0,0,2,2],
                 "frames":2,
@@ -13,7 +13,7 @@
     "Cable": {
         "acceptsElectricity": true,
         "electricityGeneration": 0,
-        "sprites": {
+        "tiles": {
             "default": {
                 "bounds":[4,0,1,1]
             }
@@ -22,7 +22,7 @@
     "City": {
         "acceptsElectricity": true,
         "electricityGeneration": -1,
-        "sprites": {
+        "tiles": {
             "default": {
                 "bounds":[0,4,2,2]
             }
@@ -31,7 +31,7 @@
     "Grass": {
         "acceptsElectricity": false,
         "electricityGeneration": 0,
-        "sprites": {
+        "tiles": {
             "default": {
                 "bounds":[6,6,2,2]
             },
