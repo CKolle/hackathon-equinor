@@ -6,12 +6,12 @@ import { Cell } from "./js/core/cell.js";
 
 class Game {
     constructor() {
+        this.grid = new Grid(20, 15);
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
         this.renderer.canvas.width=window.innerWidth-20;
         this.renderer.canvas.height=window.innerHeight-30;
-        this.engine = new Engine(this.renderer);
-        this.grid = new Grid(20, 15);
+        this.engine = new Engine(this.renderer, this.grid);
 
     }
 
