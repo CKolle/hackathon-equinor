@@ -34,7 +34,7 @@ class Game {
         this.electicity = new Timeseries("Production", 30, 30, 200, 100);
         this.engine = new Engine(this.renderer, this.grid, this.timeseries);
 
-        this.engine.addSystem("Production", this.electicity);
+        // this.engine.addSystem("Production", this.electicity);
 
     }
 

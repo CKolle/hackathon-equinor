@@ -16,6 +16,7 @@ class Renderer {
     render(gameState) {
         this.clear();
         this.renderGrid();
+        this.renderGrid(gameState.timeseries);
         // Buildings
         // Ui
     }
@@ -54,7 +55,11 @@ class Renderer {
     }
 
     renderGraph(timeseriesData) {
+        console.log("ok");
+        console.log(timeseriesData);
         // Draw here
+        // this.ctx.beginPath();
+        // this.ctx.moveTo()
     }
 }
 
