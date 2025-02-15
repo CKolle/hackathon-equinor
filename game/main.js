@@ -15,8 +15,6 @@ class Game {
         // Scale the canvas to fit the screen
 
         this.viewport = this.renderer.viewport;
-        
-
         this.inputService = new InputService(this.renderer.canvas);
 
         window.addEventListener("resize", this.handleResize.bind(this));
@@ -75,6 +73,10 @@ class Game {
         console.log("Game starting...");
         this.engine.start();
     }
+}
+
+function onConfigLoaded(){
+
 }
 
 const game = new Game();
