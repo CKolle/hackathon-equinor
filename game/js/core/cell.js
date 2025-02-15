@@ -1,3 +1,5 @@
+import { Vector } from "../utils/vector.js";
+
 class Cell {
     constructor(x, y, acceptsElectricity = false){
         this.x = x;
@@ -5,7 +7,9 @@ class Cell {
         this.acceptsElectricity = acceptsElectricity;
         this.electricityLevel = 0;
         this.electricityGeneration = 0;
-        this.type = cells.EMPTY;
+        this.type = cells.GRASS;
+
+        this.tileOffset = new Vector();
     }
 
     async setType(type){
@@ -17,7 +21,7 @@ class Cell {
 }
 
 const cells = Object.freeze({
-    EMPTY: "Empty",
+    GRASS: "Grass",
     WINDMILL: "Windmill",
     CABLE: "Cable",
     CITY: "City",

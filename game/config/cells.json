@@ -1,11 +1,43 @@
 {
     "Windmill": {
-        "electricityGeneration": 1
+        "acceptsElectricity": false,
+        "electricityGeneration": 1,
+        "tiles": {
+            "default": {
+                "bounds":[0,0,2,2],
+                "frames":2,
+                "framerate":13
+            }
+        }
     },
     "Cable": {
-        "electricityGeneration": 0
+        "acceptsElectricity": true,
+        "electricityGeneration": 0,
+        "tiles": {
+            "default": {
+                "bounds":[4,0,1,1]
+            }
+        }
     },
     "City": {
-        "electricityGeneration": -1
+        "acceptsElectricity": true,
+        "electricityGeneration": -1,
+        "tiles": {
+            "default": {
+                "bounds":[0,4,2,2]
+            }
+        }
+    },
+    "Grass": {
+        "acceptsElectricity": false,
+        "electricityGeneration": 0,
+        "tiles": {
+            "default": {
+                "bounds":[6,6,2,2]
+            },
+            "alternative": {
+                "bounds":[4,6,2,2]
+            }
+        }
     }
 }

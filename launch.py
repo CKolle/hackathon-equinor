@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 def launch_game_server():
-    PORT = 8000
+    PORT = 8001
     DIRECTORY = 'game'
 
     game_dir = Path(__file__).parent / DIRECTORY

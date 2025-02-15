@@ -1,5 +1,6 @@
 import {Viewport} from "./viewport.js";
 import {Vector} from "../utils/vector.js";
+import {TilesetManager} from "./tilsetManager.js";
 class Renderer {
     constructor(canvas) {
         this.canvas = canvas;
@@ -9,6 +10,7 @@ class Renderer {
         this.ctx = canvas.getContext("2d");
         this.GRID_COLOR = '#fff';
         this.GRID_LINE_WIDTH = 10;
+        this.tilesetManager = new TilesetManager();
 
     }
 
@@ -25,12 +27,37 @@ class Renderer {
 
     render(gameState) {
         this.clear();
+        this.renderBuildings(gameState.grid);
         this.renderGrid();
         // console.log(gameState);
         this.renderGraph(gameState.timeseries);
         // Buildings
+        // Day night cycle
+        
+
         // Ui
     }
+
+    renderBuildings(grid) {
+        // Get visible area of the grid
+        const topLeft = this.viewport.screenToGrid(new Vector(0, 0));
+        const bottomRight = this.viewport.screenToGrid(new Vector(this.canvas.width, this.canvas.height));
+
+        const startX = Math.floor(topLeft.x - 1);
+        const startY = Math.floor(topLeft.y - 1);
+        const endX = Math.ceil(bottomRight.x + 1);
+        const endY = Math.ceil(bottomRight.y + 1);
+
+        // Iterate through visible cells
+        for (let y = startY; y <= endY; y++) {
+            for (let x = startX; x <= endX; x++) {
+                const cell = grid.getCell(x, y);
+                if (!cell) continue;
+                this.renderTile(cell.type, cell.tileOffset, x, y);
+            }
+        }
+    }
+
 
     renderGrid() {
 
@@ -79,10 +106,10 @@ class Renderer {
             }
         }
         */
-        
+
         // Function and constants
         function normalize(value, min, max) {
-            // returns a value from 0 to 1, all values will 
+            // returns a value from 0 to 1, all values will
             // be scaled based on the timeseries (max, min) values
             return (value - min) / (max - min);
         }
@@ -92,20 +119,20 @@ class Renderer {
         const values = timeseries.data.values;
         const maxValue = Math.max(...values);
         const minValue = Math.min(...values);
-        
+
         // Draw background
         this.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
         this.ctx.fillRect(
-            timeseries.posX - bgPaddingX, 
-            timeseries.posY - bgPaddingY, 
-            timeseries.width + bgPaddingX * 2, 
+            timeseries.posX - bgPaddingX,
+            timeseries.posY - bgPaddingY,
+            timeseries.width + bgPaddingX * 2,
             timeseries.height + bgPaddingY * 2);
 
         // Plot title
         this.ctx.font = `12px Arial`;
         this.ctx.beginPath();
         this.ctx.fillStyle = "white";
-        this.ctx.fillText(timeseries.name, 
+        this.ctx.fillText(timeseries.name,
             timeseries.posX, //+ 0.5 * timeseries.width - ((timeseries.name.length) * 16)/2, // 16 is fontsize
             timeseries.posY - bgPaddingY/3,
             timeseries.width);
@@ -119,6 +146,30 @@ class Renderer {
             this.ctx.lineTo(lineX, lineY);
         }
         this.ctx.stroke();
+    }
+
+    renderTile(tile, tileOffset, x, y) {
+        const screenPos = this.viewport.gridToScreen(new Vector(x, y));
+        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset);
+
+        // Use the cell size from viewport for rendered size
+        const cellSize = this.viewport.getCellSize();
+        this.ctx.drawImage(
+            this.tilesetManager.tileset,
+            sourceRect.x,
+            sourceRect.y,
+            sourceRect.width,
+            sourceRect.height,
+            screenPos.x,
+            screenPos.y,
+            cellSize,
+            cellSize
+        );
+    }
+
+
+    renderSprite(sprite, x, y) {
+        // TBD
     }
 
 }
