@@ -15,7 +15,7 @@ export class Engine {
 
     update(deltaTime) {
         for (const system of this.systems) {
-            system.update(deltaTime);
+            system[1].update(deltaTime);
         }
     }
 
