@@ -9,7 +9,7 @@ class Renderer {
         this.viewport = new Viewport(canvas.width, canvas.height);
         this.ctx = canvas.getContext("2d");
         this.GRID_COLOR = '#fff';
-        this.GRID_LINE_WIDTH = 10;
+        this.GRID_LINE_WIDTH = 2;
         this.tilesetManager = new TilesetManager();
 
     }
@@ -150,7 +150,7 @@ class Renderer {
 
     renderTile(tile, tileOffset, x, y) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));
-        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset);
+        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset, x, y);
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();

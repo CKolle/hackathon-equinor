@@ -87,7 +87,6 @@ window.addEventListener("load", () => {
 function addStartupCells() {
     // Adds a windmill, a cable and a city
     game.grid.update(cells.WINDMILL, 0, 0);
-    game.grid.update(cells.CABLE, 1, 0);
-    game.grid.update(cells.CITY, 2, 0);
-    console.log(game.grid.cells);
+    game.grid.update(cells.CABLE, 2, 0);
+    game.grid.update(cells.CITY, 3, 0);
 }

@@ -17,13 +17,23 @@ class TilesetManager {
             this.loaded = true;
         });
     }
-
-
-    getTileSourceRect(cellType, tileOffset) {
+    getTileSourceRect(cellType, tileOffset, x, y) {
         const tile = config["cells"][cellType];
         const electedTile = tile.tiles.default;
-        let xPos = electedTile.bounds[0] + tileOffset.x;
-        let yPos = electedTile.bounds[1] + tileOffset.y;
+        let xPos = electedTile.bounds[0];
+        let yPos = electedTile.bounds[1];
+    
+        // Fix bitwise shift precedence & ensure randomness calculation is correct
+        let random = x * 55 + y * 13 + 2*(x%3) + 3*(x%4) + 5*(y%3) + x;
+    
+        if (electedTile.shuffle) {
+            xPos += random % electedTile.bounds[2];
+            yPos += random % electedTile.bounds[3];
+        } else {
+            xPos += tileOffset.x;
+            yPos += tileOffset.y;
+        }
+    
         return {
             x: xPos * this.tileSize,
             y: yPos * this.tileSize,
