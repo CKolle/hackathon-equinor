@@ -27,24 +27,12 @@ class Game {
                 mouse.dy / this.viewport.getCellSize()
             );
         }
-        
-        this.inputService.onScroll = (mouse)=>{
-            // Get the current center of the viewport in world coordinates
-            let centerX = this.viewport.position.x + this.viewport.getWidth() / 2;
-            let centerY = this.viewport.position.y + this.viewport.getHeight() / 2;
-            // console.log(centerX, centerY, this.viewport.position.x, this.viewport.position.y);
-            
-            // Apply the zoom
-            this.viewport.zoom(ZOOM_AMOUNT, mouse.scroll < 0);
-        
-            // Calculate the new center after zoom
-            let newCenterX = this.viewport.position.x + this.viewport.getWidth() / 2;
-            let newCenterY = this.viewport.position.y + this.viewport.getHeight() / 2;
-        
-            // Compute the difference and adjust the pan to keep the center stable
-            this.viewport.pan(
-                newCenterX-centerX,
-                newCenterY-centerY,
+
+        this.inputService.onScroll = (mouse) => {
+            this.viewport.zoom(
+                ZOOM_AMOUNT,
+                mouse.screenPos,
+                mouse.scroll > 0
             );
         }
 
