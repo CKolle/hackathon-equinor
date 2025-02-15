@@ -3,7 +3,7 @@ import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
 import { Timeseries } from "./js/ui/timeseries.js";
-import { TimeseriesManager } from "./js/ui/TimeseriesManager.js";
+import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { BuilderService } from "./js/core/builderService.js";
