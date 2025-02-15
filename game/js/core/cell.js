@@ -1,7 +1,7 @@
-import { Vector } from "../utils/vector.js";
+import {Vector} from "../utils/vector.js";
 
 class Cell {
-    constructor(x, y, acceptsElectricity = false){
+    constructor(x, y, acceptsElectricity = false) {
         this.x = x;
         this.y = y;
         this.acceptsElectricity = acceptsElectricity;
@@ -12,7 +12,7 @@ class Cell {
         this.tileOffset = new Vector();
     }
 
-    async setType(type){
+    setType(type) {
         this.type = type;
         this.electricityLevel = 0;
         let prefab = config["cells"][type];
@@ -27,5 +27,5 @@ const cells = Object.freeze({
     CITY: "City",
 });
 
-export { cells };
-export { Cell };
+export {cells};
+export {Cell};
