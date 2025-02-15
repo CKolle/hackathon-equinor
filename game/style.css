@@ -9,7 +9,7 @@ body {
 
 canvas {
     background-color: #000;
-    border: 2px solid #fff;
+    border: 1px solid #666;
     position: absolute;
     top:0;
     left:0;
