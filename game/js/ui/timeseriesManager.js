@@ -71,7 +71,7 @@ export class TimeseriesManager {
         this.wind.push(
             Math.sin(this.dates[this.dates.length - 1] / 200 
             + Math.sin(this.dates[this.dates.length - 1] / 20)));
-        console.log(this.totalCO2Emissions);
+        // console.log(this.totalCO2Emissions);
 
         // push(this.data.values[this.data.values.length-1] + Math.random()*10-5); // testing value
 
