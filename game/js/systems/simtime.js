@@ -3,7 +3,7 @@ const SECONDS_PER_DAY = 3600 * 24;
 class SimTimeSystem {
     constructor(secondsPerGameDay = 60 * 1){
         this.timeOfDay = SECONDS_PER_DAY / 4; // Start at dawn
-        this.day = 0;
+        this.day = 100;
         this.realToGameTime = SECONDS_PER_DAY / secondsPerGameDay;
         this.lightIntensity = 0;
     }

@@ -1,9 +1,8 @@
 export class Engine {
-    constructor(renderer, grid, timeseriesManager) {
+    constructor(renderer, grid) {
         this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
-        this.timeseriesManager = timeseriesManager;
         this.systems = new Map();
         this.grid = grid;
         this.factors = {
@@ -48,7 +47,7 @@ export class Engine {
         return {
             grid: this.grid,
             time: this.lastUpdate,
-            timeseriesManager: this.timeseriesManager,
+            stateRecords: this.systems.get("StateRecorder").records,
             lightIntensity: this.systems.get("SimTime")?this.systems.get("SimTime").lightIntensity:0,
             factors: this.factors
         };

@@ -65,7 +65,7 @@ class Renderer {
         this.renderGrid();
         this.overlayNight(gameState.lightIntensity);
         // console.log(gameState);
-        this.renderGraph(gameState.timeseriesManager);
+        this.renderGraphs(gameState.stateRecords);
         // Buildings
     }
     overlayNight(light){
@@ -138,20 +138,7 @@ class Renderer {
         this.ctx.strokeRect(x, y, w, h);
     }
 
-    renderGraph(timeseriesManager) {
-        /*
-        timeseriesManager = [{
-            name: "Production,
-            posX: 30,
-            posY: 30,
-            width: 200,
-            height: 100,
-            data: {
-                date: [1, 2, 3, 4, 5],
-                values: [5, 2, 3, 2, 5]
-            }
-        }, ..]
-        */
+    renderGraphs(stateRecords) {
 
         // Function and constants
         function normalize(value, min, max) {
@@ -164,9 +151,10 @@ class Renderer {
         const bgPaddingY = 20;
 
         this.ctx.lineWidth = 1;
-        for (let i = 0; i < timeseriesManager.timeseriesList.length; i++) {
-            const timeseries = timeseriesManager.timeseriesUIList[i];
-            const values = timeseriesManager.timeseriesList[i];
+        let graphKeys = Object.keys(stateRecords);
+        let y = 50;
+        for (let i = 0; i < graphKeys.length; i++) {
+            const values = stateRecords[graphKeys[i]];
 
             const maxValue = Math.max(...values);
             const minValue = Math.min(...values);
@@ -174,29 +162,30 @@ class Renderer {
             // Draw background
             this.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
             this.ctx.fillRect(
-                timeseries.posX - bgPaddingX,
-                timeseries.posY - bgPaddingY,
-                timeseries.width + bgPaddingX * 2,
-                timeseries.height + bgPaddingY * 2);
+                50 - bgPaddingX,
+                y - bgPaddingY,
+                250 + bgPaddingX * 2,
+                70 + bgPaddingY * 2);
 
             // Plot title
             this.ctx.font = `12px Arial`;
             this.ctx.beginPath();
             this.ctx.fillStyle = "white";
-            this.ctx.fillText(timeseries.name,
-                timeseries.posX, //+ 0.5 * timeseries.width - ((timeseries.name.length) * 16)/2, // 16 is fontsize
-                timeseries.posY - bgPaddingY/3,
-                timeseries.width);
+            this.ctx.fillText(graphKeys[i],
+                50, //+ 0.5 * timeseries.width - ((timeseries.name.length) * 16)/2, // 16 is fontsize
+                y - bgPaddingY/3,
+                250);
             this.ctx.fill();
     
             this.ctx.strokeStyle = "white";
             this.ctx.beginPath();
             for (let i = 0; i < values.length; i++) {
-                const lineX = timeseries.posX + timeseries.width * normalize(i, 0, values.length-1);
-                const lineY = timeseries.posY + timeseries.height * normalize(values[i], maxValue, minValue);
+                const lineX = 50 + 250 * normalize(i, 0, values.length-1);
+                const lineY = y + 70 * normalize(values[i], maxValue, minValue);
                 this.ctx.lineTo(lineX, lineY);
             }
             this.ctx.stroke();
+            y += 100; 
         }
     }
 

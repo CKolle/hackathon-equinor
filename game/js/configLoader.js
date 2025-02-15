@@ -7,5 +7,5 @@ async function loadConfig(name = "cells") {
 }
 
 function loadAllConfigs() {
-    Promise.all(["cells","wind"].map(loadConfig));
+    Promise.all(["cells","weather"].map(loadConfig));
 }

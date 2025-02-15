@@ -6,9 +6,11 @@ import { Timeseries } from "./js/ui/timeseries.js";
 import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
+import { StateRecorderSystem } from "./js/systems/stateRecorder.js";
 import { SimTimeSystem } from "./js/systems/simtime.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
+import { SimWindSystem } from "./js/systems/simwind.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
@@ -67,7 +69,7 @@ class Game {
             new Timeseries("Wind", 30, 600, 100, 50),
         ]);
 
-        this.engine = new Engine(this.renderer, this.grid, this.timeseriesManager);
+        this.engine = new Engine(this.renderer, this.grid);
 
         this.engine.addSystem("TimeseriesManager", this.timeseriesManager);
 
@@ -76,6 +78,16 @@ class Game {
         
         let simTimeSystem = new SimTimeSystem();
         this.engine.addSystem("SimTime", simTimeSystem);
+        
+        let simWindSystem = new SimWindSystem();
+        this.engine.addSystem("SimWind", simWindSystem);
+
+        let stateRecorderSystem = new StateRecorderSystem({
+            "Sunshine": (state, dt) => state.factors["sun"],
+            "Wind": (state, dt) => state.factors["wind"],
+            "Temperature": (state, dt) => state.factors["temperature"],
+        });
+        this.engine.addSystem("StateRecorder", stateRecorderSystem);
 
     }
 
