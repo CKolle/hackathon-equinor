@@ -8,11 +8,15 @@ import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { SimTimeSystem } from "./js/systems/simtime.js";
 import { BuilderService } from "./js/core/builderService.js";
+import { AudioManager } from "./js/core/audio.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
 class Game {
     constructor() {
+        this.audioManager = new AudioManager();
+        this.initAudio().then(r => console.log('Audio initialized'));
+
         this.grid = new Grid(20, 15);
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
@@ -72,6 +76,20 @@ class Game {
         let simTimeSystem = new SimTimeSystem();
         this.engine.addSystem("SimTime", simTimeSystem);
 
+    }
+
+    async initAudio() {
+        try {
+            await this.audioManager.loadMusic('background', 'assets/bgm.mp3');
+
+            document.addEventListener('click', () => {
+                this.audioManager.resumeAudioContext();
+                this.audioManager.playMusic('background', true);
+                this.audioManager.setMusicVolume(0.3);
+            }, { once: true });
+        } catch (error) {
+            console.error('Failed to initialize audio:', error);
+        }
     }
 
     handleResize() {
