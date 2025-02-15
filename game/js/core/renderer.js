@@ -29,6 +29,9 @@ class Renderer {
         // console.log(gameState);
         this.renderGraph(gameState.timeseries);
         // Buildings
+        // Day night cycle
+        
+
         // Ui
     }
 

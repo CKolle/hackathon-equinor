@@ -1,6 +1,6 @@
 import { Vector } from "../utils/vector.js";
 
-const MIN_ZOOM = 1;
+const MIN_ZOOM = 3;
 const MAX_ZOOM = 50;
 
 class Viewport {
