@@ -57,7 +57,7 @@ class Renderer {
 
     render(gameState) {
         this.clear();
-        this.renderTiles(gameState.grid);
+        this.renderTiles(gameState.grid, gameState.time);
         this.renderGrid();
         // console.log(gameState);
         this.renderGraph(gameState.timeseriesManager);
@@ -68,7 +68,7 @@ class Renderer {
         // Ui
     }
 
-    renderTiles(grid) {
+    renderTiles(grid, time) {
         // Get visible area of the grid
         const topLeft = this.viewport.screenToGrid(new Vector(0, 0));
         const bottomRight = this.viewport.screenToGrid(new Vector(this.canvas.width, this.canvas.height));
@@ -83,7 +83,7 @@ class Renderer {
             for (let x = startX; x <= endX; x++) {
                 const cell = grid.getCell(x, y);
                 if (!cell) continue;
-                this.renderTile(cell.type, cell.tileOffset, x, y);
+                this.renderTile(cell.type, cell.tileOffset, x, y, time);
             }
         }
     }
@@ -181,9 +181,9 @@ class Renderer {
         }
     }
 
-    renderTile(tile, tileOffset, x, y) {
+    renderTile(tile, tileOffset, x, y, time) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));
-        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset, x, y);
+        const sourceRect = this.tilesetManager.getTileSourceRect(tile, tileOffset, x, y, time);
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();

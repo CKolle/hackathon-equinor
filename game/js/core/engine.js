@@ -54,6 +54,7 @@ export class Engine {
 
         return {
             grid: this.grid,
+            time: this.lastUpdate,
             timeseriesManager: this.timeseriesManager
             // ...Object.fromEntries(
             //     this.timeseriesManager.timeseriesList.map(ts => [ts.name.toLowerCase(), ts])
