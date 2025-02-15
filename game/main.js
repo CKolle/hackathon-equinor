@@ -1,6 +1,8 @@
 import { Renderer } from "./js/core/renderer.js";
 import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
+import { cells } from "./js/core/cell.js";
+import { Cell } from "./js/core/cell.js";
 
 class Game {
     constructor() {

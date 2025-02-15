@@ -12,3 +12,6 @@ const cells = Object.freeze({
     CABLE: "Cable",
     CITY: "City",
 });
+
+export { cells };
+export { Cell };
