@@ -45,3 +45,6 @@ class Grid {
 
 
 }
+
+
+export { Grid };
