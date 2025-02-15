@@ -29,4 +29,8 @@ export class Engine {
         this.lastUpdate = performance.now();
         this.gameLoop(performance.now());
     }
+
+    getGameState() {
+        // Return the game state
+    }
 }
