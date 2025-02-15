@@ -4,6 +4,8 @@ import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
 import { InputService } from "./js/core/inputService.js";
 
+const ZOOM_AMOUNT = 1.1;
+
 class Game {
     constructor() {
         this.grid = new Grid(20, 15);
@@ -19,6 +21,10 @@ class Game {
         this.inputService.onMouseMove = (mouse)=>{
             if(mouse.button==0) return;
             this.viewport.pan(mouse.dx, mouse.dy);
+        }
+        
+        this.inputService.onScroll = (mouse)=>{
+            this.viewport.zoom(ZOOM_AMOUNT, mouse.scroll < 0);
         }
 
         this.grid = new Grid(20, 15);

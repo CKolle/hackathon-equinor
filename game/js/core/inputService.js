@@ -6,9 +6,11 @@ class InputService {
             button: 0,
             screenPos: new Vector(),
             dx:0,
-            dy:0
+            dy:0,
+            scroll:0,
         };
         this.onMouseMove = null;
+        this.onScroll = null;
 
         canvasElement.addEventListener("mousedown", (e)=>{
             this.mouse.button = e.buttons;
@@ -18,6 +20,11 @@ class InputService {
         canvasElement.addEventListener("mouseup", (e)=>{
             this.mouse.button = e.buttons;
             e.preventDefault();
+        });
+        
+        canvasElement.addEventListener("mousewheel", (e)=>{
+            this.mouse.scroll = e.deltaY;
+            if(this.onScroll) this.onScroll(this.mouse);
         });
 
         canvasElement.addEventListener("mousemove", (e)=>{
