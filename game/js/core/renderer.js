@@ -1,12 +1,12 @@
-import {ViewportController} from "./viewportController.js";
+import {Viewport} from "./viewport.js";
 import {Vector} from "../utils/vector.js";
 class Renderer {
-    constructor(canvas) {
+    constructor(canvas, viewport) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.viewport = new ViewportController(canvas.width, canvas.height);
-        this.GRID_COLOR = '#ccc';
-        this.GRID_LINE_WIDTH = 1;
+        this.viewport = viewport;
+        this.GRID_COLOR = '#fff';
+        this.GRID_LINE_WIDTH = 10;
     }
 
     clear() {
@@ -36,7 +36,6 @@ class Renderer {
         for (let x = startX; x <= endX; x++) {
             const startPoint = this.viewport.gridToScreen(new Vector(x, startY));
             const endPoint = this.viewport.gridToScreen(new Vector(x, endY));
-
             this.ctx.beginPath();
             this.ctx.moveTo(startPoint.x, startPoint.y);
             this.ctx.lineTo(endPoint.x, endPoint.y);
