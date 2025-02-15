@@ -6,6 +6,7 @@ import { Timeseries } from "./js/ui/timeseries.js";
 import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
+import { SimTimeSystem } from "./js/systems/simtime.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
 
@@ -72,6 +73,9 @@ class Game {
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
+        
+        let simTimeSystem = new SimTimeSystem();
+        this.engine.addSystem("SimTime", simTimeSystem);
 
     }
 
