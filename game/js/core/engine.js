@@ -1,11 +1,10 @@
 export class Engine {
-    constructor(renderer) {
+    constructor(renderer, grid) {
         this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
         this.systems = new Map();
-
-
+        this.grid = grid;
 
     }
 
@@ -40,6 +39,8 @@ export class Engine {
     }
 
     getGameState() {
-        // Return the game state
+        return {
+            grid: this.grid
+        };
     }
 }

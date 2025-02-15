@@ -8,6 +8,7 @@ import { Vector } from "./js/utils/vector.js";
 
 class Game {
     constructor() {
+        this.grid = new Grid(20, 15);
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
         this.renderer.canvas.width=window.innerWidth-20;
@@ -18,9 +19,9 @@ class Game {
             this.renderer.canvas.height
         );
 
-        this.engine = new Engine(this.renderer);
         this.grid = new Grid(20, 15);
         
+        this.engine = new Engine(this.renderer, this.grid);
 
     }
 
