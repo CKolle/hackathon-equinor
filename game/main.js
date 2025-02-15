@@ -2,8 +2,6 @@ import { Renderer } from "./js/core/renderer.js";
 import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
-import { Viewport } from "./js/core/viewport.js";
-import { Vector } from "./js/utils/vector.js";
 import { InputService } from "./js/core/inputService.js";
 
 const ZOOM_AMOUNT = 1.1;
@@ -11,19 +9,16 @@ const ZOOM_AMOUNT = 1.1;
 class Game {
     constructor() {
         this.grid = new Grid(20, 15);
-        this.renderer = new Renderer(document.getElementById("gameCanvas"), null);
+        this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
-        this.renderer.canvas.width=window.innerWidth-20;
-        this.renderer.canvas.height=window.innerHeight-30;
+
+        this.viewport = this.renderer.viewport;
         
 
         this.inputService = new InputService(this.renderer.canvas);
 
-        this.viewport = new Viewport(
-            this.renderer.canvas.width,
-            this.renderer.canvas.height,
-        );
-        this.renderer.viewport = this.viewport;
+        window.addEventListener("resize", this.handleResize.bind(this));
+
 
         this.inputService.onMouseMove = (mouse)=>{
             if(mouse.button==0) return;
@@ -59,6 +54,12 @@ class Game {
 
     }
 
+    handleResize() {
+        const width = window.innerWidth - 20;
+        const height = window.innerHeight - 30;
+        this.renderer.resize(width, height);
+    }
+
     start() {
         console.log("Game starting...");
         this.engine.start();
@@ -71,6 +72,8 @@ window.addEventListener("load", () => {
     game.start();
     addStartupCells();
 });
+
+
 
 function addStartupCells() {
     // Adds a windmill, a cable and a city
