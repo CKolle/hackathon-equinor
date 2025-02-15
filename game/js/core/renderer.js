@@ -159,7 +159,7 @@ class Renderer {
                 timeseries.posY - bgPaddingY,
                 timeseries.width + bgPaddingX * 2,
                 timeseries.height + bgPaddingY * 2);
-    
+                
             // Plot title
             this.ctx.font = `12px Arial`;
             this.ctx.beginPath();
