@@ -17,6 +17,7 @@ class Game {
         // Scale the canvas to fit the screen
 
         this.viewport = this.renderer.viewport;
+        this.viewport.setGridSize(this.grid.width, this.grid.height);
         this.inputService = new InputService(this.renderer.canvas);
         this.builderService = new BuilderService(this.grid); 
 
