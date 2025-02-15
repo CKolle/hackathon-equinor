@@ -1,5 +1,8 @@
 import { Vector } from "../utils/vector.js";
 
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 50;
+
 class Viewport {
     constructor(displayWidth, displayHeight){
         this.displayWidth = displayWidth;
@@ -12,6 +15,7 @@ class Viewport {
     zoom(multiplier, invert=false){
         if(invert) this.scale /= multiplier;
         else this.scale *= multiplier;
+        this.scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, this.scale));
     }
 
     pan(dx, dy){

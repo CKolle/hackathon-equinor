@@ -5,7 +5,7 @@ class Renderer {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.viewport = viewport;
-        this.GRID_COLOR = '#fff';
+        this.GRID_COLOR = '#ccc';
         this.GRID_LINE_WIDTH = 10;
     }
 
