@@ -2,9 +2,9 @@ import { Renderer } from "./js/core/renderer.js";
 import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
-import { Cell } from "./js/core/cell.js";
-import { ViewportController } from "./js/core/viewportController.js";
+import { Viewport } from "./js/core/viewport.js";
 import { Vector } from "./js/utils/vector.js";
+import { InputService } from "./js/core/inputService.js";
 
 class Game {
     constructor() {
@@ -14,10 +14,12 @@ class Game {
         this.renderer.canvas.width=window.innerWidth-20;
         this.renderer.canvas.height=window.innerHeight-30;
         
-        this.viewport = new ViewportController(
+        this.viewport = new Viewport(
             this.renderer.canvas.width,
             this.renderer.canvas.height
         );
+
+        this.controllerService = new InputService(this.renderer.canvas);
 
         this.grid = new Grid(20, 15);
         

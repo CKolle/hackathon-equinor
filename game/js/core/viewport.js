@@ -1,6 +1,6 @@
 import { Vector } from "../utils/vector.js";
 
-class ViewportController {
+class Viewport {
     constructor(displayWidth, displayHeight){
         this.displayWidth = displayWidth;
         this.displayHeight = displayHeight;
@@ -34,4 +34,4 @@ class ViewportController {
     }
 }
 
-export { ViewportController }
+export { Viewport }
