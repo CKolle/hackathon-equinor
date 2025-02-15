@@ -30,7 +30,7 @@ class Renderer {
         this.renderBuildings(gameState.grid);
         this.renderGrid();
         // console.log(gameState);
-        this.renderGraph(gameState.timeseries);
+        this.renderGraph(gameState.production);
         // Buildings
         // Day night cycle
         
