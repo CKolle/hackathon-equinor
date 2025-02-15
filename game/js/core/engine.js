@@ -3,11 +3,20 @@ export class Engine {
         this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
+        this.systems = new Map();
+
+
 
     }
 
+    addSystem(name, system) {
+        this.systems.set(name, system);
+    }
+
     update(deltaTime) {
-        // Simulation logic here
+        for (const system of this.systems) {
+            system.update(deltaTime);
+        }
     }
 
 
