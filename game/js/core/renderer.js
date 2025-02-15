@@ -154,21 +154,6 @@ class Renderer {
 
         // Use the cell size from viewport for rendered size
         const cellSize = this.viewport.getCellSize();
-        const renderedWidth = cellSize * sourceRect.width;
-        const renderedHeight = cellSize * sourceRect.height;
-
-        // console.log(
-        //     this.tilesetManager.tileset,
-        //     sourceRect.x,
-        //     sourceRect.y,
-        //     sourceRect.width,
-        //     sourceRect.height,
-        //     screenPos.x,
-        //     screenPos.y,
-        //     renderedWidth,
-        //     renderedHeight
-        // );
-
         this.ctx.drawImage(
             this.tilesetManager.tileset,
             sourceRect.x,
@@ -177,8 +162,8 @@ class Renderer {
             sourceRect.height,
             screenPos.x,
             screenPos.y,
-            renderedWidth,
-            renderedHeight
+            cellSize,
+            cellSize
         );
     }
 

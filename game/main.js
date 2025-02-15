@@ -89,4 +89,5 @@ function addStartupCells() {
     game.grid.update(cells.WINDMILL, 0, 0);
     game.grid.update(cells.CABLE, 1, 0);
     game.grid.update(cells.CITY, 2, 0);
+    console.log(game.grid.cells);
 }
