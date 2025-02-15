@@ -42,7 +42,8 @@ export class Engine {
     getGameState() {
         return {
             grid: this.grid,
-            timeseries: this.timeseries
+            timeseries: this.timeseries,
+            time: this.lastUpdate
         };
     }
 }

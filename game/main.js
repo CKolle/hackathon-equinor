@@ -4,6 +4,7 @@ import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
 import { Timeseries } from "./js/ui/timeseries.js";
 import { InputService } from "./js/core/inputService.js";
+import { ElectricitySystem } from "./js/systems/electricity.js";
 import { BuilderService } from "./js/core/builderService.js";
 
 const ZOOM_AMOUNT = 1.1;
@@ -16,6 +17,7 @@ class Game {
 
         this.viewport = this.renderer.viewport;
         this.inputService = new InputService(this.renderer.canvas);
+        this.builderService = new BuilderService(this.grid); 
 
         window.addEventListener("resize", this.handleResize.bind(this));
 
@@ -53,8 +55,8 @@ class Game {
         this.production = new Timeseries("Production", 30, 200, 100, 50);
         this.engine = new Engine(this.renderer, this.grid, this.production);
 
-        // this.engine.addSystem("Production", this.electicity);
-
+        let electricitySystem = new ElectricitySystem(this.grid);
+        this.engine.addSystem("Electricity", electricitySystem);
     }
 
     handleResize() {

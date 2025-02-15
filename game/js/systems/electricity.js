@@ -8,7 +8,7 @@ class ElectricitySystem {
         this.activeCells.push(obj);
     }
 
-    update(gameState, dt){
+    update(dt){
         this.activeCells.forEach(cable => {
             // Check for adjacent tiles if we can share electricity with an object
             this.grid.findConnectedactiveCells(cable.x, cable.y).forEach(neighbor => {
@@ -20,3 +20,5 @@ class ElectricitySystem {
         });
     }
 }
+
+export { ElectricitySystem };
