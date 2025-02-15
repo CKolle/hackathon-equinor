@@ -2,8 +2,6 @@ import { Renderer } from "./js/core/renderer.js";
 import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
-import { Timeseries } from "./js/ui/timeseries.js";
-import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { StateRecorderSystem } from "./js/systems/stateRecorder.js";
@@ -60,18 +58,7 @@ class Game {
         //     new Timeseries("Capital", 30, 400, 100, 50),
         // ]);
 
-        this.timeseriesManager = new TimeseriesManager("TimeseriesManager", this.grid, [
-            new Timeseries("Production", 30, 200, 100, 50),
-            new Timeseries("Consumption", 30, 200, 100, 50),
-            new Timeseries("EnergyStorage", 30, 300, 100, 50),
-            new Timeseries("TotalCO2Emissions", 30, 400, 100, 50),
-            new Timeseries("Sunshine", 30, 500, 100, 50),
-            new Timeseries("Wind", 30, 600, 100, 50),
-        ]);
-
         this.engine = new Engine(this.renderer, this.grid);
-
-        this.engine.addSystem("TimeseriesManager", this.timeseriesManager);
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);

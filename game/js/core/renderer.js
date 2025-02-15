@@ -165,7 +165,7 @@ class Renderer {
                 50 - bgPaddingX,
                 y - bgPaddingY,
                 250 + bgPaddingX * 2,
-                70 + bgPaddingY * 2);
+                50 + bgPaddingY * 2);
 
             // Plot title
             this.ctx.font = `12px Arial`;
@@ -181,7 +181,7 @@ class Renderer {
             this.ctx.beginPath();
             for (let i = 0; i < values.length; i++) {
                 const lineX = 50 + 250 * normalize(i, 0, values.length-1);
-                const lineY = y + 70 * normalize(values[i], maxValue, minValue);
+                const lineY = y + 50 * normalize(values[i], maxValue, minValue);
                 this.ctx.lineTo(lineX, lineY);
             }
             this.ctx.stroke();
