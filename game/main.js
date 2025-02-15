@@ -7,6 +7,7 @@ import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
+import { Vector } from "./js/utils/vector.js";
 
 const ZOOM_AMOUNT = 1.1;
 populateShopPanel();
@@ -34,6 +35,9 @@ class Game {
                 mouse.dx / this.viewport.getCellSize(),
                 mouse.dy / this.viewport.getCellSize()
             );
+        }
+        this.inputService.onClick = (mouse) => {
+            this.builderService.attemptBuild(this.viewport.screenToGrid(mouse.screenPos).floor());
         }
 
         this.inputService.onScroll = (mouse) => {
@@ -88,3 +92,10 @@ function addStartupCells() {
     game.grid.update(cells.CABLE, 2, 0);
     game.grid.update(cells.CITY, 3, 0);
 }
+
+document.addEventListener("keydown",()=>{
+    game.builderService.attemptBuild(game.viewport.screenToGrid(game.inputService.mouse.screenPos).floor());
+    game.builderService.attemptBuild(new Vector(6,0));
+    // console.log(game.viewport.screenToGrid(game.inputService.mouse.screenPos).floor());
+    // game.grid.update(cells.CITY, 6, 0);
+})

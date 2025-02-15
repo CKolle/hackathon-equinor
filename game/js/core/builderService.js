@@ -6,9 +6,13 @@ class BuilderService {
         this.grid = grid;
     }
     attemptBuild(position){
-        console.log(this.selectedType, position.x, position.y);
-        this.grid.update(this.selectedType, position.x, position.y);
-        this.selectedType = null;
+        if(this.selectedType){
+            console.log(this.selectedType, position.x, position.y,"awdawd");
+            this.grid.update(cells.CITY, 7, 0);
+            this.grid.update(this.selectedType, position.x, position.y);
+            this.selectedType = null;
+            console.log(this.grid.cells);
+        }
     }
 }
 
