@@ -57,8 +57,6 @@ class Game {
 
         // this.engine.addSystem("Production", this.electicity);
 
-        // this.engine.addSystem("Production", this.electicity);
-
     }
 
     handleResize() {

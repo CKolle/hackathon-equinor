@@ -80,6 +80,7 @@ class Renderer {
         }
         */
         
+        // Function and constants
         function normalize(value, min, max) {
             // returns a value from 0 to 1, all values will 
             // be scaled based on the timeseries (max, min) values
@@ -92,26 +93,30 @@ class Renderer {
         const maxValue = Math.max(...values);
         const minValue = Math.min(...values);
         
+        // Draw background
         this.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
         this.ctx.fillRect(
             timeseries.posX - bgPaddingX, 
             timeseries.posY - bgPaddingY, 
-            timeseries.width + bgPaddingX*2, 
-            timeseries.height + bgPaddingY*2);
+            timeseries.width + bgPaddingX * 2, 
+            timeseries.height + bgPaddingY * 2);
+
+        // Plot title
+        this.ctx.font = `12px Arial`;
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(timeseries.name, 
+            timeseries.posX, //+ 0.5 * timeseries.width - ((timeseries.name.length) * 16)/2, // 16 is fontsize
+            timeseries.posY - bgPaddingY/3,
+            timeseries.width);
+        this.ctx.fill();
 
         this.ctx.strokeStyle = "white";
         this.ctx.beginPath();
-        // let lineX = timeseries.posX + timeseries.width * normalize(0, 0, values.length);
-        // let lineY = timeseries.posY + timeseries.height * normalize(values[0], maxValue, minValue);
-        // this.ctx.moveTo(lineX, lineY);
-        
         for (let i = 0; i < values.length; i++) {
             const lineX = timeseries.posX + timeseries.width * normalize(i, 0, values.length-1);
             const lineY = timeseries.posY + timeseries.height * normalize(values[i], maxValue, minValue);
-            // console.log(values[i], maxValue, minValue)
-
             this.ctx.lineTo(lineX, lineY);
-            // console.log(x,y, timeseries.posX, normalize(i, 0, values.length), timeseries.width, timeseries.posX + timeseries.width * normalize(i, 0, values.length));
         }
         this.ctx.stroke();
     }
