@@ -3,6 +3,7 @@ import { Engine } from "./js/core/engine.js";
 import { Grid } from "./js/core/grid.js";
 import { cells } from "./js/core/cell.js";
 import { InputService } from "./js/core/inputService.js";
+import { BuilderService } from "./js/core/builderService.js";
 
 const ZOOM_AMOUNT = 1.1;
 
@@ -49,6 +50,15 @@ class Game {
         }
 
         this.grid = new Grid(20, 15);
+        this.builderService = new BuilderService(this.grid);
+        
+        this.inputService.onClick = (mouse)=>{
+            if(this.builderService.selectedType){
+                let buildPos = this.viewport.screenToGrid(mouse.screenPos).floor();
+                // console.log(`Attempting to build ${this.builderService.selectedType} on `,buildPos.x,buildPos.y);
+                this.builderService.attemptBuild(buildPos);
+            }
+        }
         
         this.engine = new Engine(this.renderer, this.grid);
 
