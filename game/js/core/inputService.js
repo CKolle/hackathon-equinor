@@ -2,24 +2,30 @@ import { Vector } from "../utils/vector.js";
 
 class InputService {
     constructor(canvasElement){
-        this.cursor = {
+        this.mouse = {
             button: 0,
             screenPos: new Vector(),
+            dx:0,
+            dy:0
         };
+        this.onMouseMove = null;
 
         canvasElement.addEventListener("mousedown", (e)=>{
-            this.cursor.button = e.buttons;
+            this.mouse.button = e.buttons;
             e.preventDefault();
         });
         
         canvasElement.addEventListener("mouseup", (e)=>{
-            this.cursor.button = e.buttons;
+            this.mouse.button = e.buttons;
             e.preventDefault();
         });
 
         canvasElement.addEventListener("mousemove", (e)=>{
-            this.cursor.screenPos.x = e.clientX;
-            this.cursor.screenPos.y = e.clientY;
+            this.mouse.dx = e.clientX - this.mouse.screenPos.x;
+            this.mouse.dy = e.clientY - this.mouse.screenPos.y;
+            this.mouse.screenPos.x = e.clientX;
+            this.mouse.screenPos.y = e.clientY;
+            if(this.onMouseMove) this.onMouseMove(this.mouse);
             e.preventDefault();
         });
     }

@@ -14,12 +14,18 @@ class Game {
         this.renderer.canvas.width=window.innerWidth-20;
         this.renderer.canvas.height=window.innerHeight-30;
         
+
+        this.inputService = new InputService(this.renderer.canvas);
+
         this.viewport = new Viewport(
             this.renderer.canvas.width,
-            this.renderer.canvas.height
+            this.renderer.canvas.height,
         );
 
-        this.controllerService = new InputService(this.renderer.canvas);
+        this.inputService.onMouseMove = (mouse)=>{
+            if(mouse.button==0) return;
+            this.viewport.pan(mouse.dx, mouse.dy);
+        }
 
         this.grid = new Grid(20, 15);
         
