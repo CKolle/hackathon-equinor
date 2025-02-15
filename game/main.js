@@ -5,7 +5,8 @@ class Game {
     constructor() {
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
-        this.renderer.canvas.width=500;
+        this.renderer.canvas.width=window.innerWidth-20;
+        this.renderer.canvas.height=window.innerHeight-30;
         this.engine = new Engine(this.renderer);
 
 
@@ -17,6 +18,8 @@ class Game {
     }
 }
 
+const game = new Game();
+
 window.addEventListener("load", () => {
-    this.start();
+    game.start();
 });
