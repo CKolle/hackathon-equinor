@@ -29,7 +29,7 @@ export class Engine {
         const deltaTime = timeStamp - this.lastUpdate;
 
         if (!this.paused) {
-            this.update(this.getGameState(deltaTime));
+            this.update(deltaTime);
         }
 
         this.renderer.render(this.getGameState(deltaTime));
@@ -44,9 +44,8 @@ export class Engine {
         this.gameLoop(performance.now());
     }
 
-    getGameState(deltaTime) {
+    getGameState() {
         return {
-            dt: deltaTime,
             grid: this.grid,
             time: this.lastUpdate,
             timeseriesManager: this.timeseriesManager,
