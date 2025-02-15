@@ -36,7 +36,14 @@ class Grid {
     }
 
     findConnectedCells(x, y) {
+        return this.getNeighbors(x, y);
+    }
 
+    update(type, x, y) {
+        let cell = this.getCell(x, y);
+        if (cell) {
+            cell.setType(type);
+        }
     }
 
     isValidPosition(x, y) {
