@@ -1,3 +1,5 @@
+import { Cell } from './cell.js';
+
 class Grid {
     constructor(width, height) {
         this.width = width;
@@ -6,8 +8,14 @@ class Grid {
     }
 
     initCells() {
-        return Array(this.height).fill
-
+        const grid = Array(this.height);
+        for (let y = 0; y < this.height; y++) {
+            grid[y] = Array(this.width);
+            for (let x = 0; x < this.width; x++) {
+                grid[y][x] = new Cell(x, y);
+            }
+        }
+        return grid;
     }
 
     getCell(x, y) {
@@ -19,20 +27,12 @@ class Grid {
     }
 
     getNeighbors(x, y) {
-        const neighbors = {
+        return {
             north: this.getCell(x, y - 1),
             south: this.getCell(x, y + 1),
             east: this.getCell(x + 1, y),
             west: this.getCell(x - 1, y)
         };
-
-        // Add diagonal neighbors if needed
-        neighbors.northEast = this.getCell(x + 1, y - 1);
-        neighbors.northWest = this.getCell(x - 1, y - 1);
-        neighbors.southEast = this.getCell(x + 1, y + 1);
-        neighbors.southWest = this.getCell(x - 1, y + 1);
-
-        return neighbors;
     }
 
     findConnectedCells(x, y) {
