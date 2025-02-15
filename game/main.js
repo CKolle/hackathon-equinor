@@ -16,6 +16,7 @@ class Game {
     constructor() {
         this.audioManager = new AudioManager();
         this.initAudio().then(r => console.log('Audio initialized'));
+        setupAudioUI(this.audioManager);
 
         this.grid = new Grid(20, 16);
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
@@ -80,7 +81,7 @@ class Game {
 
     async initAudio() {
         try {
-            await this.audioManager.loadMusic('background', 'assets/bgm.mp3');
+            await this.audioManager.loadMusic('background', 'assets/sounds/bgm.mp3');
 
             document.addEventListener('click', () => {
                 this.audioManager.resumeAudioContext();
@@ -111,7 +112,23 @@ window.addEventListener("load", () => {
     addStartupCells();
 });
 
+function setupAudioUI(audioManager) {
+    const audioToggle = document.getElementById('audioToggle');
+    const soundWaves = document.getElementById('soundWaves');
 
+    let isMuted = false;
+
+    audioToggle.addEventListener('click', () => {
+        isMuted = !isMuted;
+        if (isMuted) {
+            audioManager.mute();
+            soundWaves.style.display = 'none';
+        } else {
+            audioManager.unmute();
+            soundWaves.style.display = 'block';
+        }
+    });
+}
 
 function addStartupCells() {
     // Adds a windmill, a cable and a city

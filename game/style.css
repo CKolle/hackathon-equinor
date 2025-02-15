@@ -38,3 +38,26 @@ body {
     width:6em;
     height:6em;
 }
+
+.audio-control {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(226, 219, 213, 0.9);
+    border: 3px solid rgb(71, 51, 55);
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.audio-control:hover {
+    background: rgba(226, 219, 213, 1);
+}
+
+.audio-control svg {
+    width: 24px;
+    height: 24px;
+}
