@@ -10,6 +10,7 @@ export class Timeseries {
 
     update(deltaTime) {
         this.data.date.push(deltaTime);
+        console.log("ok");
         this.data.values.push(Math.random()*10); // testing value
     }
 }
