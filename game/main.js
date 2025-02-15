@@ -72,7 +72,10 @@ class Game {
         let stateRecorderSystem = new StateRecorderSystem({
             "Sunshine": (state, dt) => state.factors["sun"],
             "Wind": (state, dt) => state.factors["wind"],
-            "Temperature": (state, dt) => state.factors["temperature"],
+            // "Temperature": (state, dt) => state.factors["temperature"],
+            "Production": (state, dt) => state.factors["production"],
+            "Consumption": (state, dt) => state.factors["consumption"],
+            "Excess": (state, dt) => state.factors["excess"],
         });
         this.engine.addSystem("StateRecorder", stateRecorderSystem);
 

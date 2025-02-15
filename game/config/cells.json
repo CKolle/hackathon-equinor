@@ -4,7 +4,7 @@
         "electricityGeneration": {
             "rate": 15,
             "environmentFactor": "wind",
-            "type": "linear"
+            "type": "cubic"
         },
         "buildCost": 50,
         "tiles": {
