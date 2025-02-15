@@ -8,8 +8,8 @@ import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { BuilderService } from "./js/core/builderService.js";
 
-const ZOOM_AMOUNT = 1.1;
-
+const ZOOM_AMOUNT = 1.2;
+populateShopPanel();
 class Game {
     constructor() {
         this.grid = new Grid(20, 15);
@@ -17,8 +17,13 @@ class Game {
         // Scale the canvas to fit the screen
 
         this.viewport = this.renderer.viewport;
+        this.viewport.setGridSize(this.grid.width, this.grid.height);
         this.inputService = new InputService(this.renderer.canvas);
-        this.builderService = new BuilderService(this.grid); 
+        this.builderService = new BuilderService(this.grid);
+        
+        clickBuildStructure = (type)=>{
+            this.builderService.selectedType = type;
+        };
 
         window.addEventListener("resize", this.handleResize.bind(this));
 
@@ -30,16 +35,17 @@ class Game {
                 mouse.dy / this.viewport.getCellSize()
             );
         }
+        this.inputService.onClick = (mouse) => {
+            this.builderService.attemptBuild(this.viewport.screenToGrid(mouse.screenPos).floor());
+        }
 
         this.inputService.onScroll = (mouse) => {
             this.viewport.zoom(
                 ZOOM_AMOUNT,
                 mouse.screenPos,
-                mouse.scroll > 0
+                mouse.scroll < 0
             );
         }
-
-        this.grid = new Grid(20, 15);
         
         // this.timeseriesManager = new TimeseriesManager([
         //     new Production("Production", this.grid, 30, 200, 100, 50),

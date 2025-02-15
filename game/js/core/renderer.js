@@ -9,8 +9,8 @@ class Renderer {
         this.pixelRatio = window.devicePixelRatio || 1;
 
         // Set the canvas size in display pixels
-        const displayWidth = window.innerWidth - 20;
-        const displayHeight = window.innerHeight - 30;
+        const displayWidth = window.innerWidth - 10;
+        const displayHeight = window.innerHeight - 10;
 
         this.canvas.width = displayWidth * this.pixelRatio;
         this.canvas.height = displayHeight * this.pixelRatio;
@@ -121,6 +121,16 @@ class Renderer {
             this.ctx.stroke();
         }
     }
+    renderPanel(x,y,w,h, outlineWidth = 3) {
+        // Fill the panel
+        this.ctx.fillStyle = "rgba(226, 219, 213, 0.9)";
+        this.ctx.fillRect(x, y, w, h);
+    
+        // Draw the outline
+        this.ctx.lineWidth = outlineWidth;
+        this.ctx.strokeStyle = "rgb(71, 51, 55)";
+        this.ctx.strokeRect(x, y, w, h);
+    }
 
     renderGraph(timeseriesManager) {
         /*
@@ -201,11 +211,6 @@ class Renderer {
             cellSize,
             cellSize
         );
-    }
-
-
-    renderSprite(sprite, x, y) {
-        // TBD
     }
 
 }

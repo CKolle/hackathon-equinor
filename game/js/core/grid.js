@@ -39,7 +39,7 @@ class Grid {
         return this.getNeighbors(x, y);
     }
 
-    update(type, x, y, tileOffset = null) {
+    update(type, x, y) {
         let bounds = config["cells"][type].tiles.default.bounds;
         for(let dx=0; dx<bounds[2]; dx++){
             for(let dy=0; dy<bounds[3]; dy++){

@@ -2,12 +2,14 @@ import { cells } from "./cell.js";
 
 class BuilderService {
     constructor(grid){
-        this.selectedType = cells.WINDMILL;
+        this.selectedType = null;
         this.grid = grid;
     }
     attemptBuild(position){
-        this.grid.update(this.selectedType, position.x, position.y);
-        this.selectedType = null;
+        if(this.selectedType){
+            this.grid.update(this.selectedType, position.x, position.y);
+            this.selectedType = null;
+        }
     }
 }
 
