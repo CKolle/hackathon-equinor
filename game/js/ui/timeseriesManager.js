@@ -37,7 +37,7 @@ export class TimeseriesManager {
         ]
     }
 
-    update(deltaTime) {
+    update(gameState, deltaTime) {
         // Preferably loaded from a .json file
         const energyOutput = {
             "City": -1,

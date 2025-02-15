@@ -1,42 +1,40 @@
 class ElectricitySystem {
     constructor(grid){
-        this.activeCells = []; // Cables
         this.grid = grid;
     }
-
-    addTileObject(obj){
-        this.activeCells.push(obj);
-    }
-
-    update(dt){
-        // console.log(this.grid);
+    
+    update(gameState, dt){
         for(let x=0; x<this.grid.width; x++){
             for(let y=0; y<this.grid.height; y++){
                 let cable = this.grid.getCell(x,y);
-                if(!cable.acceptsElectricity && cable.electricityGeneration<=0) continue;
-                if(cable.electricityGeneration>0)
-                // cable.electricityLevel += cable.electricityGeneration;
-                    cable.electricityLevel = 1;
-                if(cable.electricityLevel<0) cable.electricityLevel = 0;
+                
+                if(cable.electricityGeneration){
+                    if(cable.electricityGeneration.rate>0){
+                        // Production
+                        cable.electricityLevel += cable.electricityGeneration.rate;
+                    }else{
+                        // Consumption
+                        if(cable.electricityLevel > 0){
+                            cable.electricityLevel += cable.electricityGeneration.rate;
+                            cable.electricityLevel = Math.max(0, cable.electricityLevel);
+                        }
+                    }
+                }
+                if(!cable.acceptsElectricity) continue;
+                
+                // Cables gain power from neighbors
                 let neighbors = this.grid.findConnectedCells(cable.x, cable.y);
                 Object.values(neighbors).forEach(neighbor => {
                     if(neighbor==null)return;
-                    if(!neighbor.acceptsElectricity) return;
-                    let donation = cable.electricityLevel * 0.1;
-                    neighbor.electricityLevel += donation;
-                    cable.electricityLevel = Math.max(0, cable.electricityLevel-donation);
+                    let donation = neighbor.electricityLevel * 0.3; // Diffusion amount
+                    cable.electricityLevel += donation;
+                    neighbor.electricityLevel = Math.max(0, neighbor.electricityLevel-donation);
                 });
+
+                if(cable.electricityLevel<0)
+                    cable.electricityLevel = 0;
             }
         }
-        // this.activeCells.forEach(cable => {
-        //     // Check for adjacent tiles if we can share electricity with an object
-        //     this.grid.findConnectedactiveCells(cable.x, cable.y).forEach(neighbor => {
-        //         if(!neighbor.acceptsElectricity) return;
-        //         let donation = cable.electricityLevel * 0.5;
-        //         neighbor.electricityLevel += donation;
-        //         cable.electricityLevel += cable.electricityGeneration - donation;
-        //     });
-        // });
     }
 }
 

@@ -6,6 +6,12 @@ export class Engine {
         this.timeseriesManager = timeseriesManager;
         this.systems = new Map();
         this.grid = grid;
+        this.factors = {
+            "sun":1,
+            "wind":1,
+            "coal":1,
+            "util":1
+        };
     }
 
     addSystem(name, system) {
@@ -13,11 +19,11 @@ export class Engine {
     }
 
     update(deltaTime) {
+        let gameState = this.getGameState();
         for (const system of this.systems) {
-            system[1].update(deltaTime);
+            system[1].update(gameState, deltaTime);
         }
     }
-
 
     gameLoop(timeStamp) {
         const deltaTime = timeStamp - this.lastUpdate;
@@ -43,7 +49,8 @@ export class Engine {
             grid: this.grid,
             time: this.lastUpdate,
             timeseriesManager: this.timeseriesManager,
-            lightIntensity: this.systems.get("SimTime")?this.systems.get("SimTime").lightIntensity:0
+            lightIntensity: this.systems.get("SimTime")?this.systems.get("SimTime").lightIntensity:0,
+            factors: this.factors
         };
     }
 }

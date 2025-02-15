@@ -17,7 +17,7 @@ class Game {
         this.audioManager = new AudioManager();
         this.initAudio().then(r => console.log('Audio initialized'));
 
-        this.grid = new Grid(20, 15);
+        this.grid = new Grid(20, 16);
         this.renderer = new Renderer(document.getElementById("gameCanvas"));
         // Scale the canvas to fit the screen
 
@@ -115,7 +115,19 @@ window.addEventListener("load", () => {
 
 function addStartupCells() {
     // Adds a windmill, a cable and a city
-    game.grid.update(cells.WINDMILL, 0, 0);
-    game.grid.update(cells.CABLE, 2, 0);
-    game.grid.update(cells.CITY, 3, 0);
+    game.grid.update(cells.WINDMILL, game.grid.width/2-2, game.grid.height/2-1);
+    // game.grid.update(cells.CABLE, game.grid.width/2, game.grid.height/2);
+    game.grid.update(cells.CITY, game.grid.width/2+1, game.grid.height/2-1);
+
+    // Make a forest surrounding the map
+    for(let x=0; x<game.grid.width; x++){
+        for(let y=0; y<game.grid.height; y++){
+            let dx = (x-game.grid.width/2)/game.grid.width*2;
+            let dy = (y-game.grid.height/2)/game.grid.height*2;
+            let density = dx*dx+dy*dy;
+            if(density > 0.7)
+                game.grid.update(cells.FOREST, x, y);
+        }
+    }
+
 }

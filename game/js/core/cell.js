@@ -23,6 +23,7 @@ class Cell {
 
 const cells = Object.freeze({
     GRASS: "Grass",
+    FOREST: "Forest",
     WINDMILL: "Windmill",
     CABLE: "Cable",
     CITY: "City",

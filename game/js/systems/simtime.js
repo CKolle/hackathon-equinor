@@ -8,7 +8,7 @@ class SimTimeSystem {
         this.lightIntensity = 0;
     }
     
-    update(dt){
+    update(gameState, dt){
         this.timeOfDay += dt*0.001 * this.realToGameTime;
         if(this.timeOfDay > SECONDS_PER_DAY){
             this.timeOfDay -= SECONDS_PER_DAY;
@@ -18,6 +18,8 @@ class SimTimeSystem {
         // Calculate the light intensity
         let p = this.getDayProgress();
         this.lightIntensity = Math.sin(p*Math.PI*2)*0.4+0.6;
+        gameState.factors["sun"] = this.lightIntensity;
+        gameState.factors["time"] = {"day":this.day, "p":p};
     }
 
     getDayProgress(){

@@ -41,13 +41,20 @@ class Grid {
 
     update(type, x, y) {
         let bounds = config["cells"][type].tiles.default.bounds;
-        for(let dx=0; dx<bounds[2]; dx++){
-            for(let dy=0; dy<bounds[3]; dy++){
-                let cell = this.getCell(x+dx, y+dy);
-                if (cell) {
-                    cell.setType(type);
-                    cell.tileOffset.x = dx;
-                    cell.tileOffset.y = dy;
+        if(config["cells"][type].tiles.default.shuffle){
+            let cell = this.getCell(x, y);
+            if (cell) {
+                cell.setType(type);
+            }
+        }else{
+            for(let dx=0; dx<bounds[2]; dx++){
+                for(let dy=0; dy<bounds[3]; dy++){
+                    let cell = this.getCell(x+dx, y+dy);
+                    if (cell) {
+                        cell.setType(type);
+                        cell.tileOffset.x = dx;
+                        cell.tileOffset.y = dy;
+                    }
                 }
             }
         }

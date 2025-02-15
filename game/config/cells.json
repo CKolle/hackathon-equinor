@@ -1,7 +1,11 @@
 {
     "Windmill": {
         "acceptsElectricity": false,
-        "electricityGeneration": 15,
+        "electricityGeneration": {
+            "rate": 15,
+            "environmentFactor": "wind",
+            "type": "linear"
+        },
         "buildCost": 50,
         "tiles": {
             "default": {
@@ -14,7 +18,11 @@
     
     "Solar panel": {
         "acceptsElectricity": false,
-        "electricityGeneration": 8,
+        "electricityGeneration": {
+            "rate": 8,
+            "environmentFactor": "sun",
+            "type": "linear"
+        },
         "buildCost": 25,
         "tiles": {
             "default": {
@@ -23,23 +31,25 @@
         }
     },
     
-    
     "Coal": {
         "acceptsElectricity": false,
-        "electricityGeneration": 40,
+        "electricityGeneration": {
+            "rate": 40,
+            "environmentFactor": "coal",
+            "type": "fuel"
+        },
         "buildCost": 60,
         "tiles": {
             "default": {
-                "bounds":[2,2,2,2],
-                "frames":2,
-                "framerate":3
+                "bounds": [2,2,2,2],
+                "frames": 2,
+                "framerate": 2.5
             }
         }
     },
 
     "Cable": {
         "acceptsElectricity": true,
-        "electricityGeneration": 0,
         "buildCost": 5,
         "tiles": {
             "default": {
@@ -50,9 +60,14 @@
             }
         }
     },
+    
     "City": {
         "acceptsElectricity": true,
-        "electricityGeneration": -10,
+        "electricityGeneration": {
+            "rate": -10,
+            "environmentFactor": "util",
+            "type": "linear"
+        },
         "buildCost": 100,
         "tiles": {
             "default": {
@@ -63,12 +78,22 @@
             }
         }
     },
+
     "Grass": {
         "acceptsElectricity": false,
-        "electricityGeneration": 0,
         "tiles": {
             "default": {
                 "bounds":[4,6,4,2],
+                "shuffle":true
+            }
+        }
+    },
+
+    "Forest": {
+        "acceptsElectricity": false,
+        "tiles": {
+            "default": {
+                "bounds":[4,5,4,1],
                 "shuffle":true
             }
         }
