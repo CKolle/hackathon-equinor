@@ -63,13 +63,15 @@ class Renderer {
         this.clear();
         this.renderTiles(gameState.grid, gameState.time);
         this.renderGrid();
+        this.overlayNight(gameState.lightIntensity);
         // console.log(gameState);
         this.renderGraph(gameState.timeseriesManager);
         // Buildings
-        // Day night cycle
-        
-
-        // Ui
+    }
+    overlayNight(light){
+        let overlayOpacity = 1-light;
+        this.ctx.fillStyle = `rgba(0,0,0,${overlayOpacity})`;
+        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
     }
 
     renderTiles(grid, time) {

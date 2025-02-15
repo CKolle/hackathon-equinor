@@ -1,7 +1,7 @@
 {
     "Windmill": {
         "acceptsElectricity": false,
-        "electricityGeneration": 1,
+        "electricityGeneration": 15,
         "buildCost": 50,
         "tiles": {
             "default": {
@@ -11,6 +11,32 @@
             }
         }
     },
+    
+    "Solar panel": {
+        "acceptsElectricity": false,
+        "electricityGeneration": 8,
+        "buildCost": 25,
+        "tiles": {
+            "default": {
+                "bounds":[0,2,2,2]
+            }
+        }
+    },
+    
+    
+    "Coal": {
+        "acceptsElectricity": false,
+        "electricityGeneration": 40,
+        "buildCost": 60,
+        "tiles": {
+            "default": {
+                "bounds":[2,2,2,2],
+                "frames":2,
+                "framerate":3
+            }
+        }
+    },
+
     "Cable": {
         "acceptsElectricity": true,
         "electricityGeneration": 0,
@@ -26,7 +52,7 @@
     },
     "City": {
         "acceptsElectricity": true,
-        "electricityGeneration": -1,
+        "electricityGeneration": -10,
         "buildCost": 100,
         "tiles": {
             "default": {

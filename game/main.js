@@ -6,6 +6,7 @@ import { Timeseries } from "./js/ui/timeseries.js";
 import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
+import { SimTimeSystem } from "./js/systems/simtime.js";
 import { BuilderService } from "./js/core/builderService.js";
 
 const ZOOM_AMOUNT = 1.2;
@@ -67,6 +68,9 @@ class Game {
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
+        
+        let simTimeSystem = new SimTimeSystem();
+        this.engine.addSystem("SimTime", simTimeSystem);
 
     }
 

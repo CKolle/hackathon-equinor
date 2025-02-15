@@ -6,7 +6,6 @@ export class Engine {
         this.timeseriesManager = timeseriesManager;
         this.systems = new Map();
         this.grid = grid;
-
     }
 
     addSystem(name, system) {
@@ -43,8 +42,8 @@ export class Engine {
         return {
             grid: this.grid,
             time: this.lastUpdate,
-            timeseriesManager: this.timeseriesManager
-
+            timeseriesManager: this.timeseriesManager,
+            lightIntensity: this.systems.get("SimTime")?this.systems.get("SimTime").lightIntensity:0
         };
     }
 }
