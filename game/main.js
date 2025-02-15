@@ -9,7 +9,7 @@ import { BuilderService } from "./js/core/builderService.js";
 import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 
 const ZOOM_AMOUNT = 1.1;
-
+populateShopPanel();
 class Game {
     constructor() {
         this.grid = new Grid(20, 15);
@@ -18,7 +18,11 @@ class Game {
 
         this.viewport = this.renderer.viewport;
         this.inputService = new InputService(this.renderer.canvas);
-        this.builderService = new BuilderService(this.grid); 
+        this.builderService = new BuilderService(this.grid);
+        
+        clickBuildStructure = (type)=>{
+            this.builderService.selectedType = type;
+        };
 
         window.addEventListener("resize", this.handleResize.bind(this));
 
@@ -29,6 +33,10 @@ class Game {
                 mouse.dx / this.viewport.getCellSize(),
                 mouse.dy / this.viewport.getCellSize()
             );
+        }
+
+        this.inputService.onClick = (mouse)=>{
+            this.builderService.attemptBuild(this.viewport.screenToGrid(mouse.screenPos));
         }
         
         this.inputService.onScroll = (mouse)=>{

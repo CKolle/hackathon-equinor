@@ -9,8 +9,8 @@ class Renderer {
         this.pixelRatio = window.devicePixelRatio || 1;
 
         // Set the canvas size in display pixels
-        const displayWidth = window.innerWidth - 20;
-        const displayHeight = window.innerHeight - 30;
+        const displayWidth = window.innerWidth - 10;
+        const displayHeight = window.innerHeight - 10;
 
         this.canvas.width = displayWidth * this.pixelRatio;
         this.canvas.height = displayHeight * this.pixelRatio;
@@ -59,9 +59,7 @@ class Renderer {
         this.clear();
         this.renderTiles(gameState.grid, gameState.time);
         this.renderGrid();
-        // console.log(gameState);
         this.renderGraph(gameState.production);
-        // Buildings
         // Day night cycle
         
 
@@ -121,23 +119,18 @@ class Renderer {
             this.ctx.stroke();
         }
     }
+    renderPanel(x,y,w,h, outlineWidth = 3) {
+        // Fill the panel
+        this.ctx.fillStyle = "rgba(226, 219, 213, 0.9)";
+        this.ctx.fillRect(x, y, w, h);
+    
+        // Draw the outline
+        this.ctx.lineWidth = outlineWidth;
+        this.ctx.strokeStyle = "rgb(71, 51, 55)";
+        this.ctx.strokeRect(x, y, w, h);
+    }
 
     renderGraph(timeseries) {
-        /*
-        timeseries = {
-            name: "Production,
-            posX: 30,
-            posY: 30,
-            width: 200,
-            height: 100,
-            data: {
-                date: [1, 2, 3, 4, 5],
-                values: [5, 2, 3, 2, 5]
-            }
-        }
-        */
-
-        // Function and constants
         function normalize(value, min, max) {
             // returns a value from 0 to 1, all values will
             // be scaled based on the timeseries (max, min) values
@@ -151,12 +144,11 @@ class Renderer {
         const minValue = Math.min(...values);
 
         // Draw background
-        this.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
-        this.ctx.fillRect(
+        this.renderPanel(
             timeseries.posX - bgPaddingX,
             timeseries.posY - bgPaddingY,
             timeseries.width + bgPaddingX * 2,
-            timeseries.height + bgPaddingY * 2);
+            timeseries.height + bgPaddingY * 2)
 
         // Plot title
         this.ctx.font = `12px Arial`;
@@ -195,11 +187,6 @@ class Renderer {
             cellSize,
             cellSize
         );
-    }
-
-
-    renderSprite(sprite, x, y) {
-        // TBD
     }
 
 }
