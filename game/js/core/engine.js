@@ -1,7 +1,6 @@
 export class Engine {
     constructor(renderer) {
-        this.running = false;
-        this.paused = false;
+        this.paused = true;
         this.lastUpdate = performance.now();
         this.renderer = renderer;
 
@@ -26,7 +25,7 @@ export class Engine {
     }
     start() {
         console.log("Engine starting...");
-        this.running = true;
+        this.paused = false;
         this.lastUpdate = performance.now();
         this.gameLoop(performance.now());
     }
