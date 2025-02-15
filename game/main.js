@@ -6,6 +6,7 @@ import { Timeseries } from "./js/ui/timeseries.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { BuilderService } from "./js/core/builderService.js";
+import { TimeseriesManager } from "./js/ui/timeseriesManager.js";
 
 const ZOOM_AMOUNT = 1.1;
 
@@ -52,17 +53,19 @@ class Game {
 
         this.grid = new Grid(20, 15);
         
-        this.production = new Timeseries("Production", 30, 200, 100, 50);
+        // this.timeseriesManager = new TimeseriesManager([
+        //     new Timeseries("Production", 30, 200, 100, 50),
+        //     new Timeseries("Capital", 30, 400, 100, 50),
+        // ])
+
         this.engine = new Engine(this.renderer, this.grid, this.production);
+        
+        this.production = new Timeseries("Production", 30, 200, 100, 50);
+        this.engine.addSystem("Production", this.production);
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
-    }
 
-    handleResize() {
-        const width = window.innerWidth - 20;
-        const height = window.innerHeight - 30;
-        this.renderer.resize(width, height);
     }
 
     handleResize() {
