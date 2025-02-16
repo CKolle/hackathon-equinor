@@ -13,7 +13,6 @@ As a Game with a Purpose (GWAP), Watts up not only provides entertainment but al
 
 ### Prerequisites
 - Python
-- Visual Studio Code (or another working IDE)
 
 ### Setup Steps
 
