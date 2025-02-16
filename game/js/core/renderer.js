@@ -157,8 +157,6 @@ class Renderer {
         for (let i = 0; i < graphKeys.length; i++) {
             const values = stateRecords[graphKeys[i]];
 
-            const maxValue = Math.max(...values);
-            const minValue = Math.min(...values);
     
             // Draw background
             this.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
@@ -180,12 +178,29 @@ class Renderer {
     
             this.ctx.strokeStyle = "white";
             this.ctx.beginPath();
-            for (let i = 0; i < values.length; i++) {
-                const lineX = 50 + 250 * normalize(i, 0, values.length-1);
-                const lineY = y + 50 * normalize(values[i], maxValue, minValue);
-                this.ctx.lineTo(lineX, lineY);
+            let x = 50;
+            let j = Math.max(0,values.length-4000);
+            let dx = 250/(values.length-j-1);
+            const maxValue = Math.max(...values.slice(j)); // Only consider the last items
+            const minValue = Math.min(...values.slice(j));
+            for (; j < values.length; j++) {
+                const lineY = y + 50 * normalize(values[j], maxValue, minValue);
+                this.ctx.lineTo(x, lineY);
+                x+=dx;
             }
             this.ctx.stroke();
+            
+            // Write last value
+            let writeY = y + 50 * normalize(values[j-1], maxValue, minValue); // Recalc last value of graph
+            this.ctx.font = `12px Arial`;
+            this.ctx.beginPath();
+            this.ctx.fillStyle = "white";
+            this.ctx.fillText(Math.round(values[j-1]*100)/100,
+                250+30, //+ 0.5 * timeseries.width - ((timeseries.name.length) * 16)/2, // 16 is fontsize
+                writeY - bgPaddingY/3,
+                250);
+            this.ctx.fill();
+
             y += 100; 
         }
     }

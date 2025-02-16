@@ -1,6 +1,6 @@
 export class PlayerLevelingSystem {
     constructor(){
-        this.funds = 200;
+        this.funds = 2000;
     }
     
     update(gameState, dt){

@@ -21,7 +21,7 @@ export class WeatherSystem {
         gameState.factors["time"] = {"day":this.day, "p":p};
         gameState.factors["timeofday"] = p;
 
-        
+        // Lerp wind and temperature
         let dayIndex = this.day;
         let floatingTarget = (dayIndex + p) * 24;
         let baseIndex = Math.floor(floatingTarget);
@@ -36,6 +36,9 @@ export class WeatherSystem {
         
         // Approximate the light intensity with temperature for seasonal differences
         gameState.factors["sun"] = this.lightIntensity + gameState.factors["temperature"]*0.04;
+
+        // Lerp city consumption rate
+        gameState.factors["cityConsumption"] = config["consumption"][baseIndex+1]*p+(1-p)*config["consumption"][baseIndex];
     }
 
     getDayProgress(){

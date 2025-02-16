@@ -74,8 +74,8 @@ class Game {
             "Sunshine": (state, dt) => state.factors["sun"],
             "Wind": (state, dt) => state.factors["wind"],
             // "Temperature": (state, dt) => state.factors["temperature"],
-            "Production": (state, dt) => state.factors["production"],
-            "Consumption": (state, dt) => state.factors["consumption"],
+            "Production (kW)": (state, dt) => state.factors["production"],
+            "Consumption (kW)": (state, dt) => state.factors["consumption"],
             "Excess": (state, dt) => state.factors["excess"],
         });
         this.engine.addSystem("StateRecorder", stateRecorderSystem);
@@ -138,9 +138,9 @@ function setupAudioUI(audioManager) {
 
 function addStartupCells() {
     // Adds a windmill, a cable and a city
-    game.grid.update(cells.WINDMILL, game.grid.width/2-2, game.grid.height/2-1);
+    // game.grid.update(cells.WINDMILL, game.grid.width/2-2, game.grid.height/2-1);
     // game.grid.update(cells.CABLE, game.grid.width/2, game.grid.height/2);
-    game.grid.update(cells.CITY, game.grid.width/2+1, game.grid.height/2-1);
+    // game.grid.update(cells.CITY, game.grid.width/2+1, game.grid.height/2-1);
 
     // Make a forest surrounding the map
     for(let x=0; x<game.grid.width; x++){
