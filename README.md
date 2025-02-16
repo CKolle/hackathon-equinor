@@ -36,5 +36,5 @@ As a Game with a Purpose (GWAP), Watts up not only provides entertainment but al
 We drew inspiration from the `entity-component` software architecture which is commonly used for development of video games. 
 
 ### CODE - TODO (our excuse)
-Due to a lack of time (we did this in 12hours) (and experience) we had to compromise on code readability and scalability to deliver a workable product.
+Due to a lack of time (and sleep) (we did this in 12hours) (and experience) we had to compromise on code readability and scalability to deliver a workable product.
 This means we did not implement components, some css is written in .js, some .js was implemented in the .html and some values were hardcoded. In the end, we're extremely happy we got this far, but for further development, a through cleanup would be necessary. 
