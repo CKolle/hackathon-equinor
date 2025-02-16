@@ -1,0 +1,38 @@
+# Pictify - Image Guessing Game
+
+![alt text]([http://url/to](https://github.com/CKolle/hackathon-equinor/tree/main/docs)/Screenshot1.png)
+
+## Overview
+**Watts up**, the Watts up Game is an interactive application designed to help people learn and explore the effect of different energy sources on GDP, production, consumption and how they are affected by the amount of sunshine and wind.
+
+We used realistic wind and sunshine data gathered from `yr.no` and realistic produciton and costs from `https://www.nve.no/energi/analyser-og-statistikk/kostnader-for-kraftproduksjon/`.
+
+As a Game with a Purpose (GWAP), Watts up not only provides entertainment but also contributes to increased awareness of different
+
+## Installation
+
+### Prerequisites
+- Python
+- Visual Studio Code (or another working IDE)
+
+### Setup Steps
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/dat240-2024/HenKolKvaSeeVag.git](https://github.com/CKolle/hackathon-equinor/)
+   cd hackathon-equinor
+   ```
+
+3. Start the application:
+   **For Windows:**
+      In the console, simply run > python launch.py or run the launch.py file in Visual Studio Code 
+
+   The application is then automatically opened at:
+      http://localhost:8001/
+
+### Architecture:
+We drew inspiration from the `entity-component` software architecture which is commonly used for development of video games. 
+
+### TODO
+Due to a lack of time (we did this in 12hours) (and experience) we had to compromise on code readability and scalability to deliver a workable product.
+This means we did not implement components, some css is written in .js, some .js was implemented in the .html and some values were hardcoded. In the end, we're extremely happy we got this far, but for further development, a through cleanup would be necessary. 
