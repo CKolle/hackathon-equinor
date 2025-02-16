@@ -9,6 +9,7 @@ import { WeatherSystem } from "./js/systems/weather.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
 import { PlayerLevelingSystem } from "./js/systems/playerLeveling.js";
+import { PauseMenu } from "./js/ui/pauseMenu.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
@@ -61,6 +62,7 @@ class Game {
         // ]);
 
         this.engine = new Engine(this.renderer, this.grid);
+        this.pauseMenu = new PauseMenu(this.engine, this.audioManager);
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
