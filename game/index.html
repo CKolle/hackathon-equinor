@@ -19,6 +19,23 @@
             <path id="soundWaves" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
         </svg>
     </button>
+    <div id="pauseOverlay" class="pause-overlay">
+        <div class="pause-menu">
+            <h2>Game Paused</h2>
+            <div class="volume-control">
+                <label class="volume-label" for="musicVolume">Music Volume</label>
+                <input type="range" id="musicVolume" class="volume-slider" min="0" max="100" value="30">
+
+                <label class="volume-label" for="sfxVolume">Sound Effects</label>
+                <input type="range" id="sfxVolume" class="volume-slider" min="0" max="100" value="70">
+            </div>
+            <div class="pause-menu-buttons">
+                <button id="resumeButton" class="pause-button">Resume Game</button>
+                <button id="restartButton" class="pause-button">Restart Game</button>
+                <button id="quitButton" class="pause-button">Quit to Menu</button>
+            </div>
+        </div>
+    </div>
     <script src="./js/configLoader.js" onload="loadAllConfigs()"></script>
     <script defer src="./js/ui/populateShopPanel.js" onstart="populateShopPanel()"></script>
     <script defer type="module" src="./main.js"></script>

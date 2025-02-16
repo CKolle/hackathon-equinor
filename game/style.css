@@ -61,3 +61,65 @@ body {
     width: 24px;
     height: 24px;
 }
+
+
+.pause-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.pause-menu {
+    background: rgba(226, 219, 213, 0.95);
+    border: 3px solid rgb(71, 51, 55);
+    padding: 20px;
+    min-width: 300px;
+}
+
+.pause-menu h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(71, 51, 55);
+}
+
+.pause-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pause-button {
+    background: #84505c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pause-button:hover {
+    background: rgb(91, 71, 75);
+}
+
+/* Volume controls */
+.volume-control {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.volume-slider {
+    width: 100%;
+}
+
+.volume-label {
+    color: rgb(71, 51, 55);
+}
