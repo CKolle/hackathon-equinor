@@ -7,6 +7,7 @@ class Cell {
         this.acceptsElectricity = acceptsElectricity;
         this.electricityLevel = 0;
         this.electricityGeneration = 0;
+        this.profitable = 0;
         this.type = cells.GRASS;
 
         this.tileOffset = new Vector();
@@ -18,6 +19,7 @@ class Cell {
         let prefab = config["cells"][type];
         this.electricityGeneration = prefab.electricityGeneration;
         this.acceptsElectricity = prefab.acceptsElectricity;
+        this.profitable = prefab.profitable;
     }
 }
 

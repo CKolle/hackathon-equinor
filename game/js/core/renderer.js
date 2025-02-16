@@ -67,6 +67,7 @@ class Renderer {
         // console.log(gameState);
         this.renderGraphs(gameState.stateRecords);
         // Buildings
+        this.renderLevelingSystem(gameState.funds);
     }
     overlayNight(light){
         let overlayOpacity = 1-light;
@@ -187,6 +188,19 @@ class Renderer {
             this.ctx.stroke();
             y += 100; 
         }
+    }
+
+    
+    renderLevelingSystem(funds) {
+        this.ctx.lineWidth = 1;
+        this.ctx.font = `12px Arial`;
+        this.ctx.beginPath();
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(`Funds: ${Math.round(funds)}`,
+            this.canvas.width/2-100,
+            50,
+            250);
+        this.ctx.fill();
     }
 
     renderCell(cell, x,y, time) {

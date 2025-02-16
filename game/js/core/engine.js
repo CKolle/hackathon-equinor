@@ -49,7 +49,8 @@ export class Engine {
             time: this.lastUpdate,
             stateRecords: this.systems.get("StateRecorder").records,
             lightIntensity: this.systems.get("SimTime")?this.systems.get("SimTime").lightIntensity:0,
-            factors: this.factors
+            factors: this.factors,
+            funds: this.systems.get("LevelingSystem").funds
         };
     }
 }

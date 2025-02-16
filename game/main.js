@@ -8,6 +8,7 @@ import { StateRecorderSystem } from "./js/systems/stateRecorder.js";
 import { WeatherSystem } from "./js/systems/weather.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
+import { PlayerLevelingSystem } from "./js/systems/playerLeveling.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
@@ -24,7 +25,9 @@ class Game {
         this.viewport = this.renderer.viewport;
         this.viewport.setGridSize(this.grid.width, this.grid.height);
         this.inputService = new InputService(this.renderer.canvas);
-        this.builderService = new BuilderService(this.grid);
+        
+        let levelingSystem = new PlayerLevelingSystem();
+        this.builderService = new BuilderService(this.grid, levelingSystem);
         
         clickBuildStructure = (type)=>{
             this.builderService.selectedType = type;
@@ -74,6 +77,8 @@ class Game {
             "Excess": (state, dt) => state.factors["excess"],
         });
         this.engine.addSystem("StateRecorder", stateRecorderSystem);
+
+        this.engine.addSystem("LevelingSystem", levelingSystem);
 
     }
 

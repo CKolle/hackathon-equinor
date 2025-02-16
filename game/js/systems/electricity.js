@@ -21,6 +21,7 @@ class ElectricitySystem {
         gameState.factors["production"] = 0; // Reset live production factor
         gameState.factors["consumption"] = 0; // Reset live consumption factor
         gameState.factors["excess"] = 0; // Metric for how much electricity is in the net
+        gameState.factors["profitable"] = 0; // Metric for how much work gets done
 
         for(let x=0; x<this.grid.width; x++){
             for(let y=0; y<this.grid.height; y++){
@@ -48,6 +49,7 @@ class ElectricitySystem {
                             cable.electricityLevel += consume;
                             cable.electricityLevel = Math.max(0, cable.electricityLevel);
                             gameState.factors["consumption"] -= consume;
+                            gameState.factors["profitable"] -= consume * cable.profitable*0.001;
                         }
                     }
                 }

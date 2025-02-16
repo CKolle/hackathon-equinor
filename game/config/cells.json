@@ -68,6 +68,7 @@
             "environmentFactor": "timeofday",
             "type": "duck"
         },
+        "profitable": 0.2,
         "buildCost": 100,
         "tiles": {
             "default": {
