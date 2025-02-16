@@ -67,7 +67,7 @@ class Renderer {
         // console.log(gameState);
         this.renderGraphs(gameState.stateRecords);
         // Buildings
-        this.renderLevelingSystem(gameState.funds);
+        this.renderLevelingSystem(gameState.factors["profitable"], gameState.funds);
     }
     overlayNight(light){
         let overlayOpacity = 1-light;
@@ -206,15 +206,30 @@ class Renderer {
     }
 
     
-    renderLevelingSystem(funds) {
+    renderLevelingSystem(profitable, funds) {
+        let gdp = profitable * 6.75;
         this.ctx.lineWidth = 1;
         this.ctx.font = `12px Arial`;
         this.ctx.beginPath();
         this.ctx.fillStyle = "white";
-        this.ctx.fillText(`Funds: ${Math.round(funds)}`,
-            this.canvas.width/2-100,
-            50,
-            250);
+        // Background for the bar
+        this.ctx.fillStyle = "#333"; // Dark background for contrast
+        this.ctx.fillRect(this.canvas.width / 2 - 150, 20, 300, 20);
+        
+        // Determine bar fill amount based on funds
+        let maxFunds = 500; // Adjust this as needed
+        let barWidth = Math.min((gdp / maxFunds) * 300, 300); // Clamp to max width
+
+        // Filled part of the bar
+        this.ctx.fillStyle = "#4CAF50"; // Green for profitability
+        this.ctx.fillRect(this.canvas.width / 2 - 150, 20, barWidth, 20);
+        
+        // Text displaying funds
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(`GDP: ${Math.round(gdp)}`,
+            this.canvas.width / 2 - 50,
+            35);
+
         this.ctx.fill();
     }
 
