@@ -87,6 +87,7 @@ class Game {
     async initAudio() {
         try {
             await this.audioManager.loadMusic('background', 'assets/sounds/bgm.mp3');
+            await this.audioManager.loadMusic('pause', 'assets/sounds/pause.mp3');
             await this.audioManager.loadSound('build', 'assets/sounds/build.wav');
 
             document.addEventListener('click', () => {

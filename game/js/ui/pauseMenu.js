@@ -40,7 +40,7 @@ class PauseMenu {
 
     pause() {
         this.overlay.style.display = 'flex';
-        this.audioManager.stopMusic();
+        this.audioManager.playMusic('pause', true);
     }
 
     unPause() {
