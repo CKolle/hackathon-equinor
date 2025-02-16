@@ -35,13 +35,28 @@
         "acceptsElectricity": false,
         "electricityGeneration": {
             "rate": 40,
-            "environmentFactor": "coal",
-            "type": "fuel"
+            "environmentFactor": "timeofday",
+            "type": "duck"
         },
         "buildCost": 60,
         "tiles": {
             "default": {
                 "bounds": [2,2,2,2],
+                "frames": 2,
+                "framerate": 2.5
+            }
+        }
+    },
+    
+    "Nuclear": {
+        "acceptsElectricity": false,
+        "electricityGeneration": {
+            "rate": 250000000
+        },
+        "buildCost": 200,
+        "tiles": {
+            "default": {
+                "bounds": [6,2,2,2],
                 "frames": 2,
                 "framerate": 2.5
             }

@@ -55,7 +55,7 @@ class ElectricitySystem {
                             consume = Math.max(consume,-cable.electricityLevel);
                             cable.electricityLevel += consume; // Since it's negative we add
                             gameState.factors["consumption"] -= consume;
-                            gameState.factors["profitable"] -= consume * cable.profitable*0.001;
+                            gameState.factors["profitable"] -= (-1+consume) * cable.profitable;
                         }
                     }
                 }
