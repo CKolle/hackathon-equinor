@@ -1,4 +1,13 @@
 function populateShopPanel() {
+    if (!config.cells) {
+        // Hacky way to wait for config to load just do a long while loop
+        let i = 100000;
+        console.log("Waiting for config to load");
+        while(i > 0){
+            i--;
+        }
+    }
+
     let buildableStructures = Object.keys(config.cells).filter(cellType => config.cells[cellType].buildCost);
     let shopDiv = document.getElementById("shop");
 
@@ -90,6 +99,8 @@ function populateShopPanel() {
         shopDiv.appendChild(container);
     });
 }
+
+
 
 let clickBuildStructure = (type) => {
     console.log("Selected:", type);
