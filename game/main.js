@@ -27,7 +27,7 @@ class Game {
         this.inputService = new InputService(this.renderer.canvas);
         
         let levelingSystem = new PlayerLevelingSystem();
-        this.builderService = new BuilderService(this.grid, levelingSystem);
+        this.builderService = new BuilderService(this.grid, levelingSystem, this.audioManager);
         
         clickBuildStructure = (type)=>{
             this.builderService.selectedType = type;
@@ -85,6 +85,7 @@ class Game {
     async initAudio() {
         try {
             await this.audioManager.loadMusic('background', 'assets/sounds/bgm.mp3');
+            await this.audioManager.loadSound('build', 'assets/sounds/build.wav');
 
             document.addEventListener('click', () => {
                 this.audioManager.resumeAudioContext();
