@@ -15,9 +15,9 @@ class PauseMenu {
         });
 
         const resumeButton = document.getElementById('resumeButton');
-        resumeButton.addEventListener('click', () => {
-            this.togglePause();
-        });
+        resumeButton.addEventListener('click', this.togglePause.bind(this));
+        const quitToMenuButton = document.getElementById('quitButton');
+        quitToMenuButton.addEventListener('click', this.quitToMenu);
     }
 
     setupVolumeControls() {
@@ -37,10 +37,9 @@ class PauseMenu {
 
     }
 
-
     pause() {
         this.overlay.style.display = 'flex';
-        this.audioManager.stopMusic();
+        this.audioManager.playMusic('pause', true);
     }
 
     unPause() {
@@ -48,9 +47,14 @@ class PauseMenu {
         this.audioManager.playMusic('background', true);
     }
 
+    quitToMenu() {
+        window.location.reload();
+
+    }
+
     togglePause() {
-        this.engine.pause = !this.engine.pause;
-        if (this.engine.pause) {
+        this.engine.paused = !this.engine.paused;
+        if (this.engine.paused) {
             this.pause();
         } else {
             this.unPause();
