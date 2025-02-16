@@ -46,7 +46,7 @@ class ElectricitySystem {
                             let consume = this.applyActivation(cable.electricityGeneration.type, 
                                 cable.electricityGeneration.environmentFactor,
                                 gameState, rate, fac);
-                            cable.electricityLevel += consume;
+                            cable.electricityLevel += consume; // Since it's negative we add
                             cable.electricityLevel = Math.max(0, cable.electricityLevel);
                             gameState.factors["consumption"] -= consume;
                             gameState.factors["profitable"] -= consume * cable.profitable*0.001;

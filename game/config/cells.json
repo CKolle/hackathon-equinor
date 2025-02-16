@@ -53,10 +53,10 @@
         "buildCost": 5,
         "tiles": {
             "default": {
-                "bounds":[4,0,1,1]
+                "bounds":[6,0,1,1]
             },
             "powered": {
-                "bounds":[4,1,1,1]
+                "bounds":[6,1,1,1]
             }
         }
     },
