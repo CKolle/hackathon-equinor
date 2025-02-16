@@ -36,7 +36,7 @@ class ElectricitySystem {
                         let produce = this.applyActivation(cable.electricityGeneration.type,
                             cable.electricityGeneration.environmentFactor,
                             gameState, rate, fac);
-                        cable.electricityLevel += produce;
+                        cable.electricityLevel = produce;
                         gameState.factors["production"] += produce;
                     }else{
                         // Consumption
