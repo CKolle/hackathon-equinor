@@ -9,6 +9,9 @@ We used realistic wind and sunshine data gathered from `yr.no` and realistic pro
 
 As a Game with a Purpose (GWAP), Watts up not only provides entertainment but also contributes to increased awareness of each energy source's strengths and weaknesses.
 
+## Notes
+- Use mouse to zoom, pan, click on buildings and then on the canvas to build. Press escapte to pause. Enjoy!
+
 ## Installation
 
 ### Prerequisites
