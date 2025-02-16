@@ -7,7 +7,7 @@
 
 We used realistic wind and sunshine data gathered from `yr.no` and realistic produciton and costs from `https://www.nve.no/energi/analyser-og-statistikk/kostnader-for-kraftproduksjon/`.
 
-As a Game with a Purpose (GWAP), Watts up not only provides entertainment but also contributes to increased awareness of different
+As a Game with a Purpose (GWAP), Watts up not only provides entertainment but also contributes to increased awareness of each energy source's strengths and weaknesses.
 
 ## Installation
 
