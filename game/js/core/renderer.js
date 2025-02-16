@@ -153,7 +153,7 @@ class Renderer {
 
         this.ctx.lineWidth = 1;
         let graphKeys = Object.keys(stateRecords);
-        let y = 50;
+        let y = 250;
         for (let i = 0; i < graphKeys.length; i++) {
             const values = stateRecords[graphKeys[i]];
 
@@ -204,34 +204,53 @@ class Renderer {
             y += 100; 
         }
     }
-
-    
     renderLevelingSystem(profitable, funds) {
         let gdp = profitable * 6.75;
+        let maxFunds = 500; // Maximum scale for both bars
+        let barMaxWidth = 300; // Maximum bar width
+    
         this.ctx.lineWidth = 1;
         this.ctx.font = `12px Arial`;
+        
+        // Center position for bars
+        let barX = 30;//(this.canvas.width - barMaxWidth) / 2.5;
+        let barY_GDP = 20;  // Y position for GDP bar
+        let barY_Funds = 50; // Y position for Funds bar
+        let barHeight = 20;
+        
         this.ctx.beginPath();
-        this.ctx.fillStyle = "white";
-        // Background for the bar
-        this.ctx.fillStyle = "#333"; // Dark background for contrast
-        this.ctx.fillRect(this.canvas.width / 2 - 150, 20, 300, 20);
+    
+        // --- GDP BAR ---
+        this.ctx.fillStyle = "#333"; // Background
+        this.ctx.fillRect(barX, barY_GDP, barMaxWidth, barHeight);
         
-        // Determine bar fill amount based on funds
-        let maxFunds = 500; // Adjust this as needed
-        let barWidth = Math.min((gdp / maxFunds) * 300, 300); // Clamp to max width
-
-        // Filled part of the bar
-        this.ctx.fillStyle = "#4CAF50"; // Green for profitability
-        this.ctx.fillRect(this.canvas.width / 2 - 150, 20, barWidth, 20);
+        let barWidthGDP = Math.min((gdp / maxFunds) * barMaxWidth, barMaxWidth);
+        this.ctx.fillStyle = "#4CAF50"; // Green for GDP
+        this.ctx.fillRect(barX, barY_GDP, barWidthGDP, barHeight);
         
-        // Text displaying funds
         this.ctx.fillStyle = "white";
-        this.ctx.fillText(`GDP: ${Math.round(gdp)}`,
-            this.canvas.width / 2 - 50,
-            35);
-
+        let gdpText = `GDP: ${Math.round(gdp)}`;
+        let gdpTextWidth = this.ctx.measureText(gdpText).width;
+        this.ctx.fillText(gdpText, 30, barY_GDP + 15);
+    
+        // --- FUNDS BAR ---
+        this.ctx.fillStyle = "#333"; // Background
+        this.ctx.fillRect(barX, barY_Funds, barMaxWidth, barHeight);
+        
+        maxFunds = 50000; // Maximum scale for both bars
+        let barWidthFunds = Math.min((funds / maxFunds) * barMaxWidth, barMaxWidth);
+        this.ctx.fillStyle = "#2196F3"; // Blue for funds
+        this.ctx.fillRect(barX, barY_Funds, barWidthFunds, barHeight);
+        
+        this.ctx.fillStyle = "white";
+        let fundsText = `Funds: ${Math.round(funds)}`;
+        let fundsTextWidth = this.ctx.measureText(fundsText).width;
+        this.ctx.fillText(fundsText, 30, barY_Funds + 15);
+    
         this.ctx.fill();
     }
+    
+    
 
     renderCell(cell, x,y, time) {
         const screenPos = this.viewport.gridToScreen(new Vector(x, y));

@@ -18,12 +18,29 @@ body {
     image-rendering: pixelated;
 }
 
+#graphs {
+    /* background-color: rgba(226, 219, 213, 0.7); */
+    /* border: 3px solid rgb(71, 51, 55); */
+    position: fixed;
+    top: 14.4em;
+    bottom: 1em;
+    left: 1em;
+    width: 13em;
+}
+#graphs > img{
+    position: absolute;
+    top:-3.5em;
+    width: 80%;
+    right: 0;
+    transform: rotate(-10deg);
+}
+
 #shop {
-    background-color: rgba(226, 219, 213, 0.9);
+    background-color: rgba(226, 219, 213, 0.7);
     border: 3px solid rgb(71, 51, 55);
     position: fixed;
     top: 8%;
-    bottom: 20%;
+    bottom: 1em;
     right: 1em;
     width: 13em;
 }
