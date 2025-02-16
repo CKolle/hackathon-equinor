@@ -19,13 +19,13 @@ As a Game with a Purpose (GWAP), Watts up not only provides entertainment but al
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/dat240-2024/HenKolKvaSeeVag.git](https://github.com/CKolle/hackathon-equinor/)
+   git clone https://github.com/CKolle/hackathon-equinor/tree/main/docs
    cd hackathon-equinor
    ```
 
 3. Start the application:
    **For Windows:**
-      In the console, simply run > python launch.py or run the launch.py file in Visual Studio Code 
+      In the console, simply run > `python launch.py` or `run the launch.py file in Visual Studio Code` 
 
    The application is then automatically opened at:
       http://localhost:8001/
