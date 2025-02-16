@@ -1,6 +1,6 @@
 # Pictify - Image Guessing Game
 
-![alt text]([http://url/to](https://github.com/CKolle/hackathon-equinor/tree/main/docs)/Screenshot1.png)
+![alt text]([http://url/to](https://github.com/CKolle/hackathon-equinor/tree/main/docs/Screenshot1.png))
 
 ## Overview
 **Watts up**, the Watts up Game is an interactive application designed to help people learn and explore the effect of different energy sources on GDP, production, consumption and how they are affected by the amount of sunshine and wind.
