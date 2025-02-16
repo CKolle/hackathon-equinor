@@ -32,22 +32,28 @@ class ElectricitySystem {
                     if(cable.electricityGeneration.rate>0){
                         // Production
                         let rate = cable.electricityGeneration.rate;
-                        let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
-                        let produce = this.applyActivation(cable.electricityGeneration.type,
-                            cable.electricityGeneration.environmentFactor,
-                            gameState, rate, fac);
+                        let produce = rate;
+                        if(cable.electricityGeneration.type){
+                            let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
+                            produce = this.applyActivation(cable.electricityGeneration.type,
+                                cable.electricityGeneration.environmentFactor,
+                                gameState, rate, fac);
+                        }
                         cable.electricityLevel = produce;
                         gameState.factors["production"] += produce;
                     }else{
                         // Consumption
                         if(cable.electricityLevel > 0){
                             let rate = cable.electricityGeneration.rate;
-                            let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
-                            let consume = this.applyActivation(cable.electricityGeneration.type, 
-                                cable.electricityGeneration.environmentFactor,
-                                gameState, rate, fac);
+                            let consume = rate;
+                            if(cable.electricityGeneration.type){
+                                let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
+                                consume = this.applyActivation(cable.electricityGeneration.type, 
+                                    cable.electricityGeneration.environmentFactor,
+                                    gameState, rate, fac);
+                            }
+                            consume = Math.max(consume,-cable.electricityLevel);
                             cable.electricityLevel += consume; // Since it's negative we add
-                            cable.electricityLevel = Math.max(0, cable.electricityLevel);
                             gameState.factors["consumption"] -= consume;
                             gameState.factors["profitable"] -= consume * cable.profitable*0.001;
                         }
@@ -59,7 +65,7 @@ class ElectricitySystem {
                 let neighbors = this.grid.findConnectedCells(cable.x, cable.y);
                 Object.values(neighbors).forEach(neighbor => {
                     if(neighbor==null)return;
-                    let donation = neighbor.electricityLevel * 0.5; // Diffusion amount
+                    let donation = neighbor.electricityLevel * 0.4; // Diffusion amount
                     cable.electricityLevel += donation;
                     neighbor.electricityLevel = Math.max(0, neighbor.electricityLevel-donation);
                 });

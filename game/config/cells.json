@@ -2,7 +2,7 @@
     "Windmill": {
         "acceptsElectricity": false,
         "electricityGeneration": {
-            "rate": 0.01,
+            "rate": 0.05,
             "environmentFactor": "wind",
             "type": "cubic"
         },
@@ -19,7 +19,7 @@
     "Solar panel": {
         "acceptsElectricity": false,
         "electricityGeneration": {
-            "rate": 8,
+            "rate": 2,
             "environmentFactor": "sun",
             "type": "linear"
         },
@@ -61,14 +61,59 @@
         }
     },
     
-    "City": {
+    "Model supplier": {
         "acceptsElectricity": true,
         "electricityGeneration": {
-            "rate": -10,
+            "rate": 100
+        },
+        "buildCost": 10,
+        "tiles": {
+            "default": {
+                "bounds":[0,8,2,2]
+            }
+        }
+    },
+    "Model consumer": {
+        "acceptsElectricity": true,
+        "electricityGeneration": {
+            "rate": -100
+        },
+        "profitable": 1.1,
+        "buildCost": 10,
+        "tiles": {
+            "default": {
+                "bounds":[2,8,2,2]
+            }
+        }
+    },
+
+    "House": {
+        "acceptsElectricity": true,
+        "electricityGeneration": {
+            "rate": -0.8,
             "environmentFactor": "timeofday",
             "type": "duck"
         },
-        "profitable": 0.2,
+        "profitable": 1.1,
+        "buildCost": 100,
+        "tiles": {
+            "default": {
+                "bounds":[2,4,2,2]
+            },
+            "powered": {
+                "bounds":[2,6,2,2]
+            }
+        }
+    },
+    
+    "City": {
+        "acceptsElectricity": true,
+        "electricityGeneration": {
+            "rate": -0.00001,
+            "environmentFactor": "cityConsumption",
+            "type": "linear"
+        },
+        "profitable": 1.3,
         "buildCost": 100,
         "tiles": {
             "default": {
