@@ -12,7 +12,7 @@ class Viewport {
         this.displayHeight = displayHeight;
         this.position = new Vector();
         // The scale is the number of grid cells that fit on the screen
-        this.scale = 10;
+        this.scale = 18;
 
         this.gridWidth = 0;
         this.gridHeight = 0;
