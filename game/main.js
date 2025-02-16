@@ -10,6 +10,7 @@ import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
 import { PlayerLevelingSystem } from "./js/systems/playerLeveling.js";
 import { PauseMenu } from "./js/ui/pauseMenu.js";
+import { MainMenu } from "./js/ui/mainMenu.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
@@ -63,6 +64,7 @@ class Game {
 
         this.engine = new Engine(this.renderer, this.grid);
         this.pauseMenu = new PauseMenu(this.engine, this.audioManager);
+        this.mainMenu = new MainMenu(this);
 
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
@@ -87,6 +89,7 @@ class Game {
     async initAudio() {
         try {
             await this.audioManager.loadMusic('background', 'assets/sounds/bgm.mp3');
+            await this.audioManager.loadMusic('pause', 'assets/sounds/pause.mp3');
             await this.audioManager.loadSound('build', 'assets/sounds/build.wav');
 
             document.addEventListener('click', () => {
@@ -109,13 +112,31 @@ class Game {
         console.log("Game starting...");
         this.engine.start();
     }
+
+    addStartupCells() {
+        // Adds a windmill, a cable and a city
+        // game.grid.update(cells.WINDMILL, game.grid.width/2-2, game.grid.height/2-1);
+        // game.grid.update(cells.CABLE, game.grid.width/2, game.grid.height/2);
+        // game.grid.update(cells.CITY, game.grid.width/2+1, game.grid.height/2-1);
+
+        // Make a forest surrounding the map
+        for(let x=0; x<this.grid.width; x++){
+            for(let y=0; y<this.grid.height; y++){
+                let dx = (x-this.grid.width/2)/this.grid.width*2;
+                let dy = (y-this.grid.height/2)/this.grid.height*2;
+                let density = dx*dx+dy*dy;
+                if(density > 0.7)
+                    this.grid.update(cells.FOREST, x, y);
+            }
+        }
+
+    }
 }
 
 const game = new Game();
 
 window.addEventListener("load", () => {
-    game.start();
-    addStartupCells();
+    game.mainMenu.show();
 });
 
 function setupAudioUI(audioManager) {
@@ -134,23 +155,4 @@ function setupAudioUI(audioManager) {
             soundWaves.style.display = 'block';
         }
     });
-}
-
-function addStartupCells() {
-    // Adds a windmill, a cable and a city
-    // game.grid.update(cells.WINDMILL, game.grid.width/2-2, game.grid.height/2-1);
-    // game.grid.update(cells.CABLE, game.grid.width/2, game.grid.height/2);
-    // game.grid.update(cells.CITY, game.grid.width/2+1, game.grid.height/2-1);
-
-    // Make a forest surrounding the map
-    for(let x=0; x<game.grid.width; x++){
-        for(let y=0; y<game.grid.height; y++){
-            let dx = (x-game.grid.width/2)/game.grid.width*2;
-            let dy = (y-game.grid.height/2)/game.grid.height*2;
-            let density = dx*dx+dy*dy;
-            if(density > 0.7)
-                game.grid.update(cells.FOREST, x, y);
-        }
-    }
-
 }
