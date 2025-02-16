@@ -139,6 +139,25 @@
             }
         }
     },
+    
+    "Real City": {
+        "acceptsElectricity": true,
+        "electricityGeneration": {
+            "rate": -1,
+            "environmentFactor": "cityConsumption",
+            "type": "linear"
+        },
+        "profitable": 1.5,
+        "buildCost": 1000,
+        "tiles": {
+            "default": {
+                "bounds":[4,8,2,2]
+            },
+            "powered": {
+                "bounds":[6,8,2,2]
+            }
+        }
+    },
 
     "Grass": {
         "acceptsElectricity": false,

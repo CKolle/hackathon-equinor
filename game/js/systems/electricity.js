@@ -39,6 +39,7 @@ class ElectricitySystem {
                                 cable.electricityGeneration.environmentFactor,
                                 gameState, rate, fac);
                         }
+                        gameState.factors["excess"] -= cable.electricityLevel;
                         cable.electricityLevel = produce;
                         gameState.factors["production"] += produce;
                     }else{
@@ -53,9 +54,11 @@ class ElectricitySystem {
                                     gameState, rate, fac);
                             }
                             consume = Math.max(consume,-cable.electricityLevel);
+                            gameState.factors["excess"] -= cable.electricityLevel;
                             cable.electricityLevel += consume; // Since it's negative we add
                             gameState.factors["consumption"] -= consume;
                             gameState.factors["profitable"] -= (-1+consume) * cable.profitable;
+                            if(cable.electricityLevel>0) cable.electricityLevel=0; // Houses cant store electricity!
                         }
                     }
                 }
