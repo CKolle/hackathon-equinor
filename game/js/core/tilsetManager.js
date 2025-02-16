@@ -19,7 +19,7 @@ class TilesetManager {
     }
     getTileSourceRect(cell, x, y, time) {
         const tile = config["cells"][cell.type];
-        const electedTile = cell.electricityLevel>0 && tile.tiles.powered ? tile.tiles.powered : tile.tiles.default;
+        const electedTile = cell.electricityLevel>0.01 && tile.tiles.powered ? tile.tiles.powered : tile.tiles.default;
         let xPos = electedTile.bounds[0];
         let yPos = electedTile.bounds[1];
         if(electedTile.frames){

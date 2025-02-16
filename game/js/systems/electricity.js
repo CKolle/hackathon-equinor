@@ -26,6 +26,7 @@ class ElectricitySystem {
         for(let x=0; x<this.grid.width; x++){
             for(let y=0; y<this.grid.height; y++){
                 let cable = this.grid.getCell(x,y);
+                cable.electricityLevel *= 0.99; // Decay
                 gameState.factors["excess"] += cable.electricityLevel;
                 
                 if(cable.electricityGeneration){
