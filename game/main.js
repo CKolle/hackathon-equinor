@@ -5,10 +5,9 @@ import { cells } from "./js/core/cell.js";
 import { InputService } from "./js/core/inputService.js";
 import { ElectricitySystem } from "./js/systems/electricity.js";
 import { StateRecorderSystem } from "./js/systems/stateRecorder.js";
-import { SimTimeSystem } from "./js/systems/simtime.js";
+import { WeatherSystem } from "./js/systems/weather.js";
 import { BuilderService } from "./js/core/builderService.js";
 import { AudioManager } from "./js/core/audio.js";
-import { SimWindSystem } from "./js/systems/simwind.js";
 
 const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
@@ -63,12 +62,9 @@ class Game {
         let electricitySystem = new ElectricitySystem(this.grid);
         this.engine.addSystem("Electricity", electricitySystem);
         
-        let simTimeSystem = new SimTimeSystem();
-        this.engine.addSystem("SimTime", simTimeSystem);
+        let weatherSystem = new WeatherSystem();
+        this.engine.addSystem("SimTime", weatherSystem);
         
-        let simWindSystem = new SimWindSystem();
-        this.engine.addSystem("SimWind", simWindSystem);
-
         let stateRecorderSystem = new StateRecorderSystem({
             "Sunshine": (state, dt) => state.factors["sun"],
             "Wind": (state, dt) => state.factors["wind"],

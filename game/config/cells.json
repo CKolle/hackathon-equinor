@@ -2,7 +2,7 @@
     "Windmill": {
         "acceptsElectricity": false,
         "electricityGeneration": {
-            "rate": 15,
+            "rate": 0.01,
             "environmentFactor": "wind",
             "type": "cubic"
         },
@@ -65,8 +65,8 @@
         "acceptsElectricity": true,
         "electricityGeneration": {
             "rate": -10,
-            "environmentFactor": "util",
-            "type": "linear"
+            "environmentFactor": "timeofday",
+            "type": "duck"
         },
         "buildCost": 100,
         "tiles": {

@@ -2,6 +2,20 @@ class ElectricitySystem {
     constructor(grid){
         this.grid = grid;
     }
+
+    applyActivation(activationType, rate, fac){
+        switch(activationType){
+            case "linear": return rate * fac;
+            case "cubic": return rate * fac*fac*fac;
+            case "duck": return rate * (Math.sin(fac *Math.PI*3)+4*fac*(1-fac*fac));
+            case "fuel":
+                // This activation also depletes the resource!!
+                let amount = Math.min(gameState.factors[cable.electricityGeneration.environmentFactor],rate);
+                amount = Math.max(amount, 0);
+                gameState.factors[cable.electricityGeneration.environmentFactor] -= amount;
+                return amount;
+        }
+    }
     
     update(gameState, dt){
         gameState.factors["production"] = 0; // Reset live production factor
@@ -18,23 +32,15 @@ class ElectricitySystem {
                         // Production
                         let rate = cable.electricityGeneration.rate;
                         let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
-                        let produce = 0;
-                        switch(cable.electricityGeneration.type){
-                            case "linear": produce = rate * fac; break;
-                            case "cubic": produce = rate * fac*fac*fac; break;
-                            case "fuel":
-                                let amount = Math.min(gameState.factors[cable.electricityGeneration.environmentFactor],rate);
-                                amount = Math.max(amount, 0);
-                                gameState.factors[cable.electricityGeneration.environmentFactor] -= amount;
-                                produce = amount;
-                                break;
-                        }
+                        let produce = this.applyActivation(cable.electricityGeneration.type, rate, fac);
                         cable.electricityLevel += produce;
                         gameState.factors["production"] += produce;
                     }else{
                         // Consumption
                         if(cable.electricityLevel > 0){
-                            let consume = cable.electricityGeneration.rate; // Should probably not be constant
+                            let rate = cable.electricityGeneration.rate;
+                            let fac = Math.abs(gameState.factors[cable.electricityGeneration.environmentFactor]);
+                            let consume = this.applyActivation(cable.electricityGeneration.type, rate, fac);
                             cable.electricityLevel += consume;
                             cable.electricityLevel = Math.max(0, cable.electricityLevel);
                             gameState.factors["consumption"] -= consume;
