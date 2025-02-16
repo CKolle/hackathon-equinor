@@ -1,46 +1,58 @@
 function populateShopPanel() {
-    let buildableStructures = [];
-    Object.keys(config["cells"]).forEach(cellType => {
-        if (config.cells[cellType].buildCost) {
-            buildableStructures.push(cellType);
-        }
-    });
+    let buildableStructures = Object.keys(config.cells).filter(cellType => config.cells[cellType].buildCost);
     let shopDiv = document.getElementById("shop");
 
-    shopDiv.style.display = 'grid';
-    shopDiv.style.gridTemplateColumns = 'repeat(3, 1fr)';
-    shopDiv.style.gap = '4px';
-    shopDiv.style.padding = '4px';
 
+    // TODO, move all styling to css
+    shopDiv.style.display = 'grid';
+    // shopDiv.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    shopDiv.style.gridTemplateColumns = 'repeat(auto-fill, minmax(100px, 1fr))';
+
+    shopDiv.style.gap = '8px';
+    shopDiv.style.padding = '8px';
+    shopDiv.style.textAlign = 'center';
+
+    const pixelRatio = window.devicePixelRatio || 1;
     const shopWidth = shopDiv.clientWidth;
-    // 8px padding on each side
     const displaySize = Math.floor((shopWidth - (8 + 8)) / 3);
 
     buildableStructures.forEach(cellType => {
+        let container = document.createElement("div");
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.alignItems = "center";
+        container.style.justifyContent = "center";
+        container.style.padding = "6px";
+        container.style.border = "2px solid #ccc";
+        container.style.borderRadius = "6px";
+        container.style.backgroundColor = "#f8f8f8";
+        container.style.transition = "all 0.2s ease";
+        container.style.cursor = "pointer";
+
+        container.addEventListener("mouseover", () => {
+            container.style.border = "2px solid #666";
+            container.style.backgroundColor = "#eaeaea";
+        });
+
+        container.addEventListener("mouseout", () => {
+            container.style.border = "2px solid #ccc";
+            container.style.backgroundColor = "#f8f8f8";
+        });
+
+        container.addEventListener("click", () => clickBuildStructure(cellType));
+
         let img = new Image();
         img.src = "../assets/tileset.png";
-        img.onload = function () {
-            let canvas = document.createElement("canvas");
-            canvas.addEventListener("click", (e) => {
-                clickBuildStructure(cellType);
-                e.preventDefault();
-            });
+        let canvas = document.createElement("canvas");
 
-            const pixelRatio = window.devicePixelRatio || 1;
+        img.onload = function () {
             canvas.width = displaySize * pixelRatio;
             canvas.height = displaySize * pixelRatio;
-
-            canvas.style.width = `${displaySize}px`;
-            canvas.style.height = `${displaySize}px`;
-            canvas.style.display = 'block';
-            canvas.style.margin = '0';
 
             let ctx = canvas.getContext("2d", {
                 alpha: true,
                 antialias: false
             });
-
-            ctx.scale(pixelRatio, pixelRatio);
             ctx.imageSmoothingEnabled = false;
 
             const bounds = config.cells[cellType].tiles.default.bounds;
@@ -56,11 +68,29 @@ function populateShopPanel() {
                 displaySize
             );
 
-            shopDiv.appendChild(canvas);
         };
+        container.appendChild(canvas);
+
+        let label = document.createElement("span");
+        label.textContent = `${cellType}`;
+        label.style.fontSize = "12px";
+        label.style.marginTop = "4px";
+        label.style.color = "#333";
+        label.style.fontWeight = "bold";
+
+        // Build Cost Label
+        let costLabel = document.createElement("span");
+        costLabel.textContent = `Cost: ${config.cells[cellType].buildCost}`;
+        costLabel.style.fontSize = "11px";
+        costLabel.style.color = "#555";
+
+
+        container.appendChild(label);
+        container.appendChild(costLabel);
+        shopDiv.appendChild(container);
     });
 }
 
 let clickBuildStructure = (type) => {
-    console.log(type);
+    console.log("Selected:", type);
 };
