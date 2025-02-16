@@ -4,8 +4,8 @@ export class AudioManager {
         this.music = new Map();
         this.currentMusic = null;
         this.isMuted = false;
-        this.musicVolume = 0.5;
-        this.soundVolume = 0.7;
+        this.musicVolume = 0.3;
+        this.soundVolume = 0.5;
 
         this.context = new (window.AudioContext)();
         this.masterGain = this.context.createGain();
