@@ -12,7 +12,7 @@ import { PlayerLevelingSystem } from "./js/systems/playerLeveling.js";
 import { PauseMenu } from "./js/ui/pauseMenu.js";
 import { MainMenu } from "./js/ui/mainMenu.js";
 
-const ZOOM_AMOUNT = 6;
+const ZOOM_AMOUNT = 1.2;
 populateShopPanel();
 class Game {
     constructor() {
