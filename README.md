@@ -1,4 +1,4 @@
-# Pictify - Image Guessing Game
+# Watts up - Energy sources city builder simulator
 
 ![Screenshot of Watts up](https://github.com/CKolle/hackathon-equinor/blob/main/docs/Screenshot.png)
 
